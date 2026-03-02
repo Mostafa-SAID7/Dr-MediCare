@@ -388,16 +388,16 @@ export default function BookAppointmentPage() {
                 <CardContent>
                   <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
                     <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="card" id="card" />
-                      <Label htmlFor="card">Credit/Debit Card</Label>
+                      <RadioGroupItem value="card" id="payment-card" />
+                      <Label htmlFor="payment-card">Credit/Debit Card</Label>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="insurance" id="insurance" />
-                      <Label htmlFor="insurance">Insurance Coverage</Label>
+                      <RadioGroupItem value="insurance" id="payment-insurance" />
+                      <Label htmlFor="payment-insurance">Insurance Coverage</Label>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="cash" id="cash" />
-                      <Label htmlFor="cash">Pay at Clinic</Label>
+                      <RadioGroupItem value="cash" id="payment-cash" />
+                      <Label htmlFor="payment-cash">Pay at Clinic</Label>
                     </div>
                   </RadioGroup>
                 </CardContent>
