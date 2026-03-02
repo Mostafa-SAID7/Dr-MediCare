@@ -1,10 +1,5 @@
-import { LucideIcon, Heart, Shield, Award } from 'lucide-react'
-
-export interface Specialty {
-  name: string
-  icon: LucideIcon
-  count: string
-}
+import { Heart, Shield, Award } from 'lucide-react'
+import { Specialty } from '@/types'
 
 export const specialties: Specialty[] = [
   { name: "Cardiology", icon: Heart, count: "12 doctors" },
