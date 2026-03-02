@@ -122,6 +122,8 @@ export default function HomePage() {
             <div className="relative">
               <div className="relative z-10">
                 <img
+                  loading="eager"
+                  fetchPriority="high"
                   src="/modern-medical-consultation-sketch.png"
                   alt="Medical consultation"
                   className="rounded-2xl shadow-2xl"

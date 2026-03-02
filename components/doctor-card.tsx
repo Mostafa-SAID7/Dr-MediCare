@@ -30,6 +30,7 @@ export function DoctorCard({ doctor }: DoctorCardProps) {
       <Link href={`/doctors/${slug}`} className="block">
         <div className="relative h-48 bg-gradient-to-br from-primary/5 to-accent/5 flex items-center justify-center overflow-hidden">
           <img
+            loading="lazy"
             src={doctor.image}
             alt={doctor.name}
             className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"

@@ -121,6 +121,7 @@ export default function PatientPortalPage() {
               <CardContent className="pt-4">
                 <div className="flex flex-col items-center space-y-4 mb-6">
                   <img
+                    loading="lazy"
                     src="/user-profile-sketch.png"
                     alt="Patient Profile"
                     className="w-24 h-24 rounded-full mx-auto object-cover border-2 border-primary"

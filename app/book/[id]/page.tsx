@@ -127,6 +127,7 @@ export default function BookAppointmentPage() {
                 <div className="text-center space-y-4">
                   <div className="w-24 h-24 rounded-full mx-auto overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
                     <img
+                      loading="lazy"
                       src={doctor.image}
                       alt={doctor.name}
                       className="w-full h-full object-cover"

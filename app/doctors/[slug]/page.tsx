@@ -52,6 +52,7 @@ export default function DoctorDetailPage() {
                 <div className="text-center space-y-4">
                   <div className="w-48 h-48 rounded-lg mx-auto overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
                     <img
+                      loading="lazy"
                       src={doctor.image}
                       alt={doctor.name}
                       className="w-full h-full object-cover"

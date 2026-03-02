@@ -49,6 +49,7 @@ export function DoctorAvatar({
   if (image && !image.includes('simple-line-sketch')) {
     return (
       <img
+        loading="lazy"
         src={image}
         alt={name}
         className={cn(
