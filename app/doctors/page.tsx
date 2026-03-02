@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription, EmptyContent } from '@/components/ui/empty'
 import Link from "next/link"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
@@ -179,22 +180,31 @@ export default function DoctorsPage() {
 
         {/* No Results */}
         {filteredDoctors.length === 0 && (
-          <div className="text-center py-12">
-            <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
-              <Search className="w-12 h-12 text-muted-foreground" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">No doctors found</h3>
-            <p className="text-gray-600 mb-4">Try adjusting your search criteria</p>
-            <Button 
-              onClick={() => {
-                setSearchTerm("")
-                setSelectedSpecialty("All Specialties")
-              }}
-              variant="outline"
-            >
-              Clear Filters
-            </Button>
-          </div>
+          <Empty>
+            <EmptyHeader>
+              <EmptyMedia>
+                <Search className="w-8 h-8" />
+              </EmptyMedia>
+              <EmptyTitle>No doctors found</EmptyTitle>
+              <EmptyDescription>
+                We couldn't find any doctors matching your search criteria.
+                <br />
+                Try adjusting your filters or search terms.
+              </EmptyDescription>
+            </EmptyHeader>
+            <EmptyContent>
+              <Button 
+                onClick={() => {
+                  setSearchTerm("")
+                  setSelectedSpecialty("All Specialties")
+                }}
+                size="lg"
+                className="gap-2"
+              >
+                Clear All Filters
+              </Button>
+            </EmptyContent>
+          </Empty>
         )}
       </div>
 

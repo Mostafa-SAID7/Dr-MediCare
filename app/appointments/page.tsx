@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription, EmptyContent } from '@/components/ui/empty'
 import Link from "next/link"
 import { MobileMenu } from "@/components/mobile-menu"
 import { Footer } from "@/components/footer"
@@ -270,37 +271,42 @@ export default function AppointmentsPage() {
 
         {/* No Results */}
         {filteredAppointments.length === 0 && (
-          <div className="text-center py-12">
-            <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
-              <Calendar className="w-12 h-12 text-muted-foreground" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">No appointments found</h3>
-            <p className="text-gray-600 mb-4">
-              {searchTerm || statusFilter !== "all" || dateFilter !== "all" 
-                ? "Try adjusting your search criteria" 
-                : "You don't have any appointments yet"}
-            </p>
-            <div className="space-x-4">
-              {(searchTerm || statusFilter !== "all" || dateFilter !== "all") && (
-                <Button 
-                  onClick={() => {
-                    setSearchTerm("")
-                    setStatusFilter("all")
-                    setDateFilter("all")
-                  }}
-                  variant="outline"
-                >
-                  Clear Filters
-                </Button>
-              )}
-              <Link href="/doctors">
-                <Button>
-                  <Calendar className="w-4 h-4 mr-2" />
-                  Book Appointment
-                </Button>
-              </Link>
-            </div>
-          </div>
+          <Empty>
+            <EmptyHeader>
+              <EmptyMedia>
+                <Calendar className="w-8 h-8" />
+              </EmptyMedia>
+              <EmptyTitle>No appointments found</EmptyTitle>
+              <EmptyDescription>
+                {searchTerm || statusFilter !== "all" || dateFilter !== "all" 
+                  ? "We couldn't find any appointments matching your criteria. Try adjusting your filters." 
+                  : "You don't have any appointments scheduled yet. Book your first appointment with one of our expert doctors."}
+              </EmptyDescription>
+            </EmptyHeader>
+            <EmptyContent>
+              <div className="flex flex-col sm:flex-row gap-3">
+                {(searchTerm || statusFilter !== "all" || dateFilter !== "all") && (
+                  <Button 
+                    onClick={() => {
+                      setSearchTerm("")
+                      setStatusFilter("all")
+                      setDateFilter("all")
+                    }}
+                    variant="outline"
+                    size="lg"
+                  >
+                    Clear All Filters
+                  </Button>
+                )}
+                <Link href="/doctors">
+                  <Button size="lg" className="gap-2">
+                    <Calendar className="w-4 h-4" />
+                    Book Appointment
+                  </Button>
+                </Link>
+              </div>
+            </EmptyContent>
+          </Empty>
         )}
       </div>
 

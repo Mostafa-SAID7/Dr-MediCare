@@ -7,7 +7,7 @@ function Empty({ className, ...props }: React.ComponentProps<'div'>) {
     <div
       data-slot="empty"
       className={cn(
-        'flex min-w-0 flex-1 flex-col items-center justify-center gap-6 text-balance rounded-lg border-dashed p-6 text-center md:p-12',
+        'flex min-w-0 flex-1 flex-col items-center justify-center gap-6 text-balance rounded-lg border border-dashed border-border/50 bg-muted/20 p-8 text-center md:p-12 transition-all duration-300 hover:border-border hover:bg-muted/30',
         className,
       )}
       {...props}
@@ -29,16 +29,16 @@ function EmptyHeader({ className, ...props }: React.ComponentProps<'div'>) {
 }
 
 const emptyMediaVariants = cva(
-  'mb-2 flex shrink-0 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0',
+  'mb-4 flex shrink-0 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0 transition-all duration-300',
   {
     variants: {
       variant: {
-        default: 'bg-transparent',
-        icon: "bg-muted text-foreground flex size-10 shrink-0 items-center justify-center rounded-lg [&_svg:not([class*='size-'])]:size-6",
+        default: 'bg-transparent [&_svg]:text-muted-foreground [&_svg]:opacity-50 hover:[&_svg]:opacity-70',
+        icon: "bg-primary/10 text-primary flex size-16 shrink-0 items-center justify-center rounded-2xl shadow-sm hover:shadow-md hover:scale-105 transition-all duration-300 [&_svg:not([class*='size-'])]:size-8",
       },
     },
     defaultVariants: {
-      variant: 'default',
+      variant: 'icon',
     },
   },
 )
@@ -62,7 +62,7 @@ function EmptyTitle({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="empty-title"
-      className={cn('text-lg font-medium tracking-tight', className)}
+      className={cn('text-xl font-semibold tracking-tight text-foreground', className)}
       {...props}
     />
   )
@@ -73,7 +73,7 @@ function EmptyDescription({ className, ...props }: React.ComponentProps<'p'>) {
     <div
       data-slot="empty-description"
       className={cn(
-        'text-muted-foreground [&>a:hover]:text-primary text-sm/relaxed [&>a]:underline [&>a]:underline-offset-4',
+        'text-muted-foreground [&>a:hover]:text-primary text-base/relaxed [&>a]:underline [&>a]:underline-offset-4 [&>a]:transition-colors',
         className,
       )}
       {...props}
