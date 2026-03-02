@@ -11,46 +11,7 @@ import { Footer } from "@/components/footer"
 import { PageHeader } from "@/components/page-header"
 import { DoctorCard } from "@/components/doctor-card"
 import { SectionContainer } from "@/components/section-container"
-
-const doctors = [
-  {
-    id: 1,
-    name: "Dr. Sarah Johnson",
-    specialty: "Cardiologist",
-    rating: 4.9,
-    experience: "15 years",
-    image: "/sketch-cardiologist-sarah.jpg",
-    nextAvailable: "Today 2:00 PM",
-    consultationFee: "$150"
-  },
-  {
-    id: 2,
-    name: "Dr. Michael Chen",
-    specialty: "Neurologist",
-    rating: 4.8,
-    experience: "12 years",
-    image: "/sketch-neurologist-michael.jpg",
-    nextAvailable: "Tomorrow 10:00 AM",
-    consultationFee: "$180"
-  },
-  {
-    id: 3,
-    name: "Dr. Emily Rodriguez",
-    specialty: "Pediatrician",
-    rating: 4.9,
-    experience: "10 years",
-    image: "/sketch-pediatrician-emily.jpg",
-    nextAvailable: "Today 4:30 PM",
-    consultationFee: "$120"
-  }
-]
-
-const specialties = [
-  { name: "Cardiology", icon: Heart, count: "12 doctors" },
-  { name: "Neurology", icon: Shield, count: "8 doctors" },
-  { name: "Pediatrics", icon: Award, count: "15 doctors" },
-  { name: "Orthopedics", icon: Heart, count: "10 doctors" },
-]
+import { doctors, specialties } from "@/data"
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true)

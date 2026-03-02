@@ -1,44 +1,21 @@
 "use client"
 
 import { useState } from "react"
-import { Calendar, Clock, User, Phone, Mail, CreditCard, Heart, ArrowLeft, Check, Menu } from 'lucide-react'
+import { Calendar, Clock, User, CreditCard, ArrowLeft, Check } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
 import Link from "next/link"
 import { useParams, useRouter } from "next/navigation"
-import { MobileMenu } from "@/components/mobile-menu"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
-
+import { getDoctorById } from "@/data"
 import { formatCurrency } from "@/lib/utils"
-
-const doctors = {
-  "1": {
-    id: 1,
-    name: "Dr. Sarah Johnson",
-    specialty: "Cardiologist",
-    rating: 4.9,
-    experience: "15 years",
-    location: "Downtown Medical Center",
-    image: "/sketch-cardiologist-sarah.jpg",
-    consultationFee: 150,
-    availableSlots: [
-      { date: "2024-01-15", time: "09:00", available: true },
-      { date: "2024-01-15", time: "10:30", available: true },
-      { date: "2024-01-15", time: "14:00", available: false },
-      { date: "2024-01-15", time: "15:30", available: true },
-      { date: "2024-01-16", time: "09:00", available: true },
-      { date: "2024-01-16", time: "11:00", available: true },
-      { date: "2024-01-16", time: "14:30", available: true },
-    ]
-  }
-}
 
 const timeSlots = [
   "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
@@ -56,8 +33,8 @@ const dates = [
 export default function BookAppointmentPage() {
   const params = useParams()
   const router = useRouter()
-  const doctorId = params.id as string
-  const doctor = doctors[doctorId as keyof typeof doctors]
+  const doctorId = parseInt(params.id as string)
+  const doctor = getDoctorById(doctorId)
 
   const [selectedDate, setSelectedDate] = useState("")
   const [selectedTime, setSelectedTime] = useState("")
@@ -76,14 +53,6 @@ export default function BookAppointmentPage() {
   const [agreeTerms, setAgreeTerms] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [bookingComplete, setBookingComplete] = useState(false)
-
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/doctors", label: "Doctors" },
-    { href: "/appointments", label: "Appointments" },
-    { href: "/contact", label: "Contact" },
-    { href: "/patient-portal", label: "Patient Portal" },
-  ]
 
   if (!doctor) {
     return (
@@ -176,7 +145,7 @@ export default function BookAppointmentPage() {
                   <Badge className="bg-primary text-white">Available Today</Badge>
                   <div className="pt-4 border-t">
                     <p className="text-sm text-gray-600">Consultation Fee</p>
-                    <p className="text-2xl font-bold text-accent">{formatCurrency(doctor.consultationFee)}</p>
+                    <p className="text-2xl font-bold text-accent">{doctor.consultationFee}</p>
                   </div>
                 </div>
               </CardContent>
@@ -254,15 +223,15 @@ export default function BookAppointmentPage() {
                   <RadioGroup value={appointmentType} onValueChange={setAppointmentType}>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="consultation" id="consultation" />
-                      <Label htmlFor="consultation">General Consultation - {formatCurrency(doctor.consultationFee)}</Label>
+                      <Label htmlFor="consultation">General Consultation - {doctor.consultationFee}</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="followup" id="followup" />
-                      <Label htmlFor="followup">Follow-up Visit - {formatCurrency(doctor.consultationFee - 30)}</Label>
+                      <Label htmlFor="followup">Follow-up Visit - {doctor.consultationFee}</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="emergency" id="emergency" />
-                      <Label htmlFor="emergency">Emergency Consultation - {formatCurrency(doctor.consultationFee + 50)}</Label>
+                      <Label htmlFor="emergency">Emergency Consultation - {doctor.consultationFee}</Label>
                     </div>
                   </RadioGroup>
                 </CardContent>

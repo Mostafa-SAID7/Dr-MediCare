@@ -10,105 +10,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import Link from "next/link"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
+import { doctors, specialtyList } from "@/data"
 
 import { slugify } from "@/lib/utils"
-
-const doctors = [
-  {
-    id: 1,
-    name: "Dr. Sarah Johnson",
-    specialty: "Cardiologist",
-    rating: 4.9,
-    reviews: 156,
-    experience: "15 years",
-    location: "Downtown Medical Center",
-    image: "/sketch-cardiologist-sarah.jpg",
-    nextAvailable: "Today 2:00 PM",
-    consultationFee: "$150",
-    languages: ["English", "Spanish"],
-    education: "Harvard Medical School"
-  },
-  {
-    id: 2,
-    name: "Dr. Michael Chen",
-    specialty: "Neurologist",
-    rating: 4.8,
-    reviews: 203,
-    experience: "12 years",
-    location: "Central Hospital",
-    image: "/sketch-neurologist-michael.jpg",
-    nextAvailable: "Tomorrow 10:00 AM",
-    consultationFee: "$180",
-    languages: ["English", "Mandarin"],
-    education: "Johns Hopkins University"
-  },
-  {
-    id: 3,
-    name: "Dr. Emily Rodriguez",
-    specialty: "Pediatrician",
-    rating: 4.9,
-    reviews: 189,
-    experience: "10 years",
-    location: "Children's Medical Center",
-    image: "/sketch-pediatrician-emily.jpg",
-    nextAvailable: "Today 4:30 PM",
-    consultationFee: "$120",
-    languages: ["English", "Spanish"],
-    education: "Stanford Medical School"
-  },
-  {
-    id: 4,
-    name: "Dr. James Wilson",
-    specialty: "Orthopedic Surgeon",
-    rating: 4.7,
-    reviews: 142,
-    experience: "18 years",
-    location: "Sports Medicine Clinic",
-    image: "/sketch-orthopedic-james.jpg",
-    nextAvailable: "Monday 9:00 AM",
-    consultationFee: "$200",
-    languages: ["English"],
-    education: "Mayo Clinic"
-  },
-  {
-    id: 5,
-    name: "Dr. Lisa Park",
-    specialty: "Dermatologist",
-    rating: 4.8,
-    reviews: 167,
-    experience: "8 years",
-    location: "Skin Care Center",
-    image: "/sketch-dermatologist-lisa.jpg",
-    nextAvailable: "Today 3:15 PM",
-    consultationFee: "$140",
-    languages: ["English", "Korean"],
-    education: "UCLA Medical School"
-  },
-  {
-    id: 6,
-    name: "Dr. Robert Taylor",
-    specialty: "General Practitioner",
-    rating: 4.6,
-    reviews: 234,
-    experience: "20 years",
-    location: "Family Health Clinic",
-    image: "/sketch-gp-robert.jpg",
-    nextAvailable: "Today 1:00 PM",
-    consultationFee: "$100",
-    languages: ["English", "French"],
-    education: "University of Pennsylvania"
-  }
-]
-
-const specialties = [
-  "All Specialties",
-  "Cardiologist",
-  "Neurologist", 
-  "Pediatrician",
-  "Orthopedic Surgeon",
-  "Dermatologist",
-  "General Practitioner"
-]
 
 export default function DoctorsPage() {
   const [searchTerm, setSearchTerm] = useState("")
@@ -171,7 +75,7 @@ export default function DoctorsPage() {
                 <SelectValue placeholder="Select specialty" />
               </SelectTrigger>
               <SelectContent>
-                {specialties.map((specialty) => (
+                {specialtyList.map((specialty) => (
                   <SelectItem key={specialty} value={specialty}>
                     {specialty}
                   </SelectItem>

@@ -1,141 +1,19 @@
 'use client'
 
-import { useState } from 'react'
-import { Heart, MapPin, Star, Calendar, Clock, Award, User, Phone, Mail, Menu, ArrowLeft } from 'lucide-react'
+import { Star, Calendar, Award, User, Phone, Mail, MapPin, ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import Link from 'next/link'
-import { useParams, useRouter } from 'next/navigation'
-import { MobileMenu } from '@/components/mobile-menu'
-import { ThemeToggle } from '@/components/theme-toggle'
+import { useParams } from 'next/navigation'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
-
-const doctorsData = {
-  'sarah-johnson': {
-    id: 1,
-    name: "Dr. Sarah Johnson",
-    specialty: "Cardiologist",
-    slug: 'sarah-johnson',
-    rating: 4.9,
-    reviews: 156,
-    experience: "15 years",
-    location: "Downtown Medical Center",
-    image: "/sketch-cardiologist-sarah.jpg",
-    nextAvailable: "Today 2:00 PM",
-    consultationFee: "$150",
-    languages: ["English", "Spanish"],
-    education: "Harvard Medical School",
-    bio: "Dr. Sarah Johnson is an accomplished cardiologist with 15 years of experience in cardiovascular health. She specializes in preventive cardiology and interventional procedures.",
-    certifications: ["Board Certified Cardiologist", "American Heart Association", "Interventional Cardiology Specialist"],
-    description: "Dedicated to providing comprehensive cardiac care with a focus on patient education and preventive medicine."
-  },
-  'michael-chen': {
-    id: 2,
-    name: "Dr. Michael Chen",
-    specialty: "Neurologist",
-    slug: 'michael-chen',
-    rating: 4.8,
-    reviews: 203,
-    experience: "12 years",
-    location: "Central Hospital",
-    image: "/sketch-neurologist-michael.jpg",
-    nextAvailable: "Tomorrow 10:00 AM",
-    consultationFee: "$180",
-    languages: ["English", "Mandarin"],
-    education: "Johns Hopkins University",
-    bio: "Dr. Michael Chen is a highly skilled neurologist specializing in neurodegenerative diseases and movement disorders.",
-    certifications: ["Board Certified Neurologist", "Neurodegenerative Disease Specialist", "Sleep Medicine Certified"],
-    description: "Expert in diagnosing and treating complex neurological conditions with advanced treatment modalities."
-  },
-  'emily-rodriguez': {
-    id: 3,
-    name: "Dr. Emily Rodriguez",
-    specialty: "Pediatrician",
-    slug: 'emily-rodriguez',
-    rating: 4.9,
-    reviews: 189,
-    experience: "10 years",
-    location: "Children's Medical Center",
-    image: "/sketch-pediatrician-emily.jpg",
-    nextAvailable: "Today 4:30 PM",
-    consultationFee: "$120",
-    languages: ["English", "Spanish"],
-    education: "Stanford Medical School",
-    bio: "Dr. Emily Rodriguez is a compassionate pediatrician dedicated to the health and wellbeing of children from infancy through adolescence.",
-    certifications: ["Board Certified Pediatrician", "Pediatric Emergency Medicine", "Child Development Specialist"],
-    description: "Providing comprehensive pediatric care with a focus on child development, vaccination, and preventive health."
-  },
-  'james-wilson': {
-    id: 4,
-    name: "Dr. James Wilson",
-    specialty: "Orthopedic Surgeon",
-    slug: 'james-wilson',
-    rating: 4.7,
-    reviews: 142,
-    experience: "18 years",
-    location: "Sports Medicine Clinic",
-    image: "/sketch-orthopedic-james.jpg",
-    nextAvailable: "Monday 9:00 AM",
-    consultationFee: "$200",
-    languages: ["English"],
-    education: "Mayo Clinic",
-    bio: "Dr. James Wilson is an experienced orthopedic surgeon specializing in sports medicine and joint replacement.",
-    certifications: ["Board Certified Orthopedic Surgery", "Sports Medicine Fellowship", "Joint Preservation Specialist"],
-    description: "Specializing in surgical and non-surgical treatment of orthopedic injuries and conditions."
-  },
-  'lisa-park': {
-    id: 5,
-    name: "Dr. Lisa Park",
-    specialty: "Dermatologist",
-    slug: 'lisa-park',
-    rating: 4.8,
-    reviews: 167,
-    experience: "8 years",
-    location: "Skin Care Center",
-    image: "/sketch-dermatologist-lisa.jpg",
-    nextAvailable: "Today 3:15 PM",
-    consultationFee: "$140",
-    languages: ["English", "Korean"],
-    education: "UCLA Medical School",
-    bio: "Dr. Lisa Park is a board-certified dermatologist specializing in cosmetic and medical dermatology.",
-    certifications: ["Board Certified Dermatologist", "Cosmetic Dermatology", "Laser Surgery Specialist"],
-    description: "Expert in treating skin conditions and offering advanced cosmetic dermatology procedures."
-  },
-  'robert-taylor': {
-    id: 6,
-    name: "Dr. Robert Taylor",
-    specialty: "General Practitioner",
-    slug: 'robert-taylor',
-    rating: 4.6,
-    reviews: 234,
-    experience: "20 years",
-    location: "Family Health Clinic",
-    image: "/sketch-gp-robert.jpg",
-    nextAvailable: "Today 1:00 PM",
-    consultationFee: "$100",
-    languages: ["English", "French"],
-    education: "University of Pennsylvania",
-    bio: "Dr. Robert Taylor is a seasoned general practitioner with 20 years of experience in primary care medicine.",
-    certifications: ["Board Certified Family Medicine", "Preventive Medicine", "Chronic Disease Management"],
-    description: "Committed to providing comprehensive primary care and building long-term patient relationships."
-  }
-}
+import { getDoctorBySlug } from '@/data'
 
 export default function DoctorDetailPage() {
   const params = useParams()
-  const router = useRouter()
   const slug = params.slug as string
-  const doctor = doctorsData[slug as keyof typeof doctorsData]
-
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/doctors", label: "Doctors" },
-    { href: "/appointments", label: "Appointments" },
-    { href: "/contact", label: "Contact" },
-    { href: "/patient-portal", label: "Patient Portal" },
-  ]
+  const doctor = getDoctorBySlug(slug)
 
   if (!doctor) {
     return (
@@ -248,7 +126,7 @@ export default function DoctorDetailPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  {doctor.certifications.map((cert, i) => (
+                  {doctor.certifications?.map((cert: string, i: number) => (
                     <div key={i} className="flex items-center space-x-2">
                       <Badge className="bg-primary/10 text-primary">{cert}</Badge>
                     </div>
@@ -285,7 +163,7 @@ export default function DoctorDetailPage() {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  {doctor.languages.map((lang, i) => (
+                  {doctor.languages?.map((lang: string, i: number) => (
                     <Badge key={i} className="bg-accent/20 text-accent">{lang}</Badge>
                   ))}
                 </div>

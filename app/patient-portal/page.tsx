@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Heart, User, Calendar, Clock, Mail, Phone, MapPin, Edit, LogOut, Menu } from 'lucide-react'
+import { User, Calendar, Clock, Edit, LogOut } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -10,64 +10,9 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { MobileMenu } from "@/components/mobile-menu"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
-
-// Placeholder data for a patient
-const patient = {
-  id: "patient-123",
-  firstName: "Jane",
-  lastName: "Doe",
-  email: "jane.doe@example.com",
-  phone: "+1 (555) 987-6543",
-  dateOfBirth: "1990-05-15",
-  address: "123 Health St, Medical City",
-  insuranceProvider: "MediCare Insurance",
-  medicalHistory: "No significant medical history. Allergies: Penicillin.",
-  profileImage: "/placeholder-user.jpg"
-}
-
-// Placeholder data for patient's appointments
-const patientAppointments = [
-  {
-    id: 1,
-    doctor: "Dr. Sarah Johnson",
-    specialty: "Cardiologist",
-    date: "2024-08-10",
-    time: "14:00",
-    status: "confirmed",
-    type: "consultation",
-    location: "Downtown Medical Center",
-    image: "/sketch-cardiologist-sarah.jpg",
-    reason: "Annual checkup"
-  },
-  {
-    id: 2,
-    doctor: "Dr. Michael Chen",
-    specialty: "Neurologist",
-    date: "2024-08-05",
-    time: "10:00",
-    status: "completed",
-    type: "followup",
-    location: "Central Hospital",
-    image: "/male-neurologist.png",
-    reason: "Migraine follow-up"
-  },
-  {
-    id: 3,
-    doctor: "Dr. Emily Rodriguez",
-    specialty: "Pediatrician",
-    date: "2024-08-20",
-    time: "16:30",
-    status: "pending",
-    type: "consultation",
-    location: "Children's Medical Center",
-    image: "/placeholder-gi9iv.png",
-    reason: "Child vaccination"
-  }
-]
+import { patient, patientAppointments, statusColors } from "@/data"
 
 const statusColors = {
   confirmed: "bg-green-100 text-green-800",
@@ -119,14 +64,6 @@ export default function PatientPortalPage() {
       hour12: true 
     })
   }
-
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/doctors", label: "Doctors" },
-    { href: "/appointments", label: "Appointments" },
-    { href: "/contact", label: "Contact" },
-    { href: "/patient-portal", label: "Patient Portal" },
-  ]
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-secondary to-background">
