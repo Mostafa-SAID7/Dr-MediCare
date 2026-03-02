@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { MobileMenu } from "@/components/mobile-menu"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 // Placeholder data for a patient
 const patient = {
@@ -145,6 +146,7 @@ export default function PatientPortalPage() {
               ))}
             </nav>
             <div className="flex items-center space-x-4">
+              <ThemeToggle />
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="text-white/90 hover:bg-white/10">
@@ -172,10 +174,10 @@ export default function PatientPortalPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Welcome, {profileData.firstName}!
           </h1>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-muted-foreground">
             Manage your profile and appointments in one place.
           </p>
         </div>
@@ -200,7 +202,7 @@ export default function PatientPortalPage() {
                     alt="Patient Profile"
                     className="w-24 h-24 rounded-full mx-auto object-cover border-2 border-primary"
                   />
-                  <h3 className="text-xl font-semibold text-gray-800">
+                  <h3 className="text-xl font-semibold text-foreground">
                     {profileData.firstName} {profileData.lastName}
                   </h3>
                 </div>
@@ -288,7 +290,7 @@ export default function PatientPortalPage() {
               <CardContent className="space-y-4">
                 {patientAppointments.filter(app => new Date(app.date) >= new Date() && app.status !== 'completed' && app.status !== 'cancelled').length > 0 ? (
                   patientAppointments.filter(app => new Date(app.date) >= new Date() && app.status !== 'completed' && app.status !== 'cancelled').map((appointment) => (
-                    <div key={appointment.id} className="flex items-center justify-between p-4 border rounded-lg bg-gray-50">
+                    <div key={appointment.id} className="flex items-center justify-between p-4 border rounded-lg bg-muted/30">
                       <div className="flex items-center space-x-4">
                         <img
                           src={`/simple-line-sketch.png?height=48&width=48&query=sketch of ${appointment.specialty.toLowerCase()} doctor`}
@@ -296,13 +298,13 @@ export default function PatientPortalPage() {
                           className="w-12 h-12 rounded-full object-cover"
                         />
                         <div>
-                          <h4 className="font-semibold text-gray-800">{appointment.doctor}</h4>
+                          <h4 className="font-semibold text-foreground">{appointment.doctor}</h4>
                           <p className="text-sm text-primary">{appointment.specialty}</p>
-                          <p className="text-xs text-gray-600">{appointment.reason}</p>
+                          <p className="text-xs text-muted-foreground">{appointment.reason}</p>
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="text-sm font-medium text-gray-800">{formatDate(appointment.date)} at {formatTime(appointment.time)}</p>
+                        <p className="text-sm font-medium text-foreground">{formatDate(appointment.date)} at {formatTime(appointment.time)}</p>
                         <Badge className={statusColors[appointment.status as keyof typeof statusColors]}>
                           {appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1)}
                         </Badge>
@@ -310,7 +312,7 @@ export default function PatientPortalPage() {
                     </div>
                   ))
                 ) : (
-                  <div className="text-center py-8 text-gray-600">
+                  <div className="text-center py-8 text-muted-foreground">
                     No upcoming appointments.
                     <Link href="/doctors">
                       <Button variant="link" className="text-primary">Book one now!</Button>
@@ -334,7 +336,7 @@ export default function PatientPortalPage() {
               <CardContent className="space-y-4">
                 {patientAppointments.filter(app => new Date(app.date) < new Date() || app.status === 'completed' || app.status === 'cancelled').length > 0 ? (
                   patientAppointments.filter(app => new Date(app.date) < new Date() || app.status === 'completed' || app.status === 'cancelled').map((appointment) => (
-                    <div key={appointment.id} className="flex items-center justify-between p-4 border rounded-lg bg-gray-50">
+                    <div key={appointment.id} className="flex items-center justify-between p-4 border rounded-lg bg-muted/30">
                       <div className="flex items-center space-x-4">
                         <img
                           src={`/simple-line-sketch.png?height=48&width=48&query=sketch of ${appointment.specialty.toLowerCase()} doctor`}
@@ -342,13 +344,13 @@ export default function PatientPortalPage() {
                           className="w-12 h-12 rounded-full object-cover"
                         />
                         <div>
-                          <h4 className="font-semibold text-gray-800">{appointment.doctor}</h4>
+                          <h4 className="font-semibold text-foreground">{appointment.doctor}</h4>
                           <p className="text-sm text-primary">{appointment.specialty}</p>
-                          <p className="text-xs text-gray-600">{appointment.reason}</p>
+                          <p className="text-xs text-muted-foreground">{appointment.reason}</p>
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="text-sm font-medium text-gray-800">{formatDate(appointment.date)} at {formatTime(appointment.time)}</p>
+                        <p className="text-sm font-medium text-foreground">{formatDate(appointment.date)} at {formatTime(appointment.time)}</p>
                         <Badge className={statusColors[appointment.status as keyof typeof statusColors]}>
                           {appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1)}
                         </Badge>
@@ -356,7 +358,7 @@ export default function PatientPortalPage() {
                     </div>
                   ))
                 ) : (
-                  <div className="text-center py-8 text-gray-600">
+                  <div className="text-center py-8 text-muted-foreground">
                     No past appointments.
                   </div>
                 )}

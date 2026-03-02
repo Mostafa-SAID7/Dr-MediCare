@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Search, Filter, Star, Calendar, MapPin, Clock, Heart, Menu } from 'lucide-react'
+import { Search, Filter, Star, Calendar, MapPin, Clock, Heart, Menu, Phone, Mail } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Link from "next/link"
 import { MobileMenu } from "@/components/mobile-menu"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 const doctors = [
   {
@@ -155,6 +156,7 @@ export default function DoctorsPage() {
               ))}
             </nav>
             <div className="flex items-center space-x-4">
+              <ThemeToggle />
               <Button className="bg-destructive hover:bg-destructive/90 text-white">
                 Emergency
               </Button>
@@ -176,7 +178,7 @@ export default function DoctorsPage() {
         </div>
 
         {/* Search and Filters */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+        <div className="bg-card rounded-lg shadow-sm border p-6 mb-8">
           <div className="grid md:grid-cols-4 gap-4">
             <div className="md:col-span-2">
               <div className="relative">
@@ -307,8 +309,8 @@ export default function DoctorsPage() {
         {/* No Results */}
         {filteredDoctors.length === 0 && (
           <div className="text-center py-12">
-            <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Search className="w-12 h-12 text-gray-400" />
+            <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
+              <Search className="w-12 h-12 text-muted-foreground" />
             </div>
             <h3 className="text-xl font-semibold text-gray-800 mb-2">No doctors found</h3>
             <p className="text-gray-600 mb-4">Try adjusting your search criteria</p>

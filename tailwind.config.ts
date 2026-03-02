@@ -10,6 +10,11 @@ const config: Config = {
 ],
 theme: {
 	extend: {
+		fontFamily: {
+			sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+			serif: ['var(--font-serif)', 'Georgia', 'serif'],
+			mono: ['var(--font-mono)', 'monospace'],
+		},
 		colors: {
 			background: 'hsl(var(--background))',
 			foreground: 'hsl(var(--foreground))',
@@ -66,6 +71,9 @@ theme: {
 			lg: 'var(--radius)',
 			md: 'calc(var(--radius) - 2px)',
 			sm: 'calc(var(--radius) - 4px)'
+		},
+		boxShadow: {
+			'custom': '0px 2px 3px 0px rgba(0, 0, 0, 0.2)',
 		},
 		keyframes: {
 			'accordion-down': {

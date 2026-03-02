@@ -171,7 +171,7 @@ export default function AppointmentsPage() {
         </div>
 
         {/* Search and Filters */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+        <div className="bg-card rounded-lg shadow-sm border p-6 mb-8">
           <div className="grid md:grid-cols-4 gap-4">
             <div className="md:col-span-2">
               <div className="relative">
@@ -344,8 +344,8 @@ export default function AppointmentsPage() {
         {/* No Results */}
         {filteredAppointments.length === 0 && (
           <div className="text-center py-12">
-            <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Calendar className="w-12 h-12 text-gray-400" />
+            <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
+              <Calendar className="w-12 h-12 text-muted-foreground" />
             </div>
             <h3 className="text-xl font-semibold text-gray-800 mb-2">No appointments found</h3>
             <p className="text-gray-600 mb-4">
@@ -367,7 +367,7 @@ export default function AppointmentsPage() {
                 </Button>
               )}
               <Link href="/doctors">
-                <Button className="bg-accent hover:bg-accent/90">
+                <Button className="bg-primary hover:bg-primary/90 text-white">
                   <Calendar className="w-4 h-4 mr-2" />
                   Book Appointment
                 </Button>

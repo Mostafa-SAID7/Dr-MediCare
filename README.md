@@ -1,30 +1,69 @@
-# Doctor reservation website
+# Dr. MediCare - Doctor Reservation Website
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+A modern, responsive doctor appointment booking platform built with Next.js 15, React 19, and TypeScript.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/mostafa-said7s-projects/v0-doctor-reservation-website)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/R28LBKIQllB)
+## Features
 
-## Overview
+- Online doctor appointment booking
+- Browse doctors by specialty
+- Patient portal for managing appointments
+- Contact form for inquiries
+- Responsive design with dark/light theme support
+- Built with modern UI components (Radix UI)
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+## Tech Stack
 
-## Deployment
+- Next.js 15.2.8
+- React 19
+- TypeScript
+- Tailwind CSS
+- Radix UI Components
+- React Hook Form with Zod validation
+- Recharts for data visualization
 
-Your project is live at:
+## Getting Started
 
-**[https://vercel.com/mostafa-said7s-projects/v0-doctor-reservation-website](https://vercel.com/mostafa-said7s-projects/v0-doctor-reservation-website)**
+### Prerequisites
 
-## Build your app
+- Node.js 18+ 
+- npm or yarn
 
-Continue building your app on:
+### Installation
 
-**[https://v0.dev/chat/projects/R28LBKIQllB](https://v0.dev/chat/projects/R28LBKIQllB)**
+```bash
+npm install --force
+```
 
-## How It Works
+Note: Use `--force` flag due to peer dependency conflicts between React 19 and some packages.
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+### Development
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the app.
+
+### Build
+
+```bash
+npm run build
+```
+
+### Production
+
+```bash
+npm start
+```
+
+## Project Structure
+
+- `/app` - Next.js app directory with pages and layouts
+- `/components` - Reusable React components
+- `/hooks` - Custom React hooks
+- `/lib` - Utility functions
+- `/public` - Static assets
+
+## License
+
+MIT

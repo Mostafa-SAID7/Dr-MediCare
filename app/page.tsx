@@ -7,7 +7,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { Loader } from "@/components/loader"
-import { MobileMenu } from "@/components/mobile-menu" // Import the new MobileMenu component
+import { MobileMenu } from "@/components/mobile-menu"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 const doctors = [
   {
@@ -92,13 +93,14 @@ export default function HomePage() {
               ))}
             </nav>
             <div className="flex items-center space-x-4">
+              <ThemeToggle />
               <Button variant="outline" className="hidden sm:inline-flex bg-foreground text-background hover:bg-foreground/90">
                 Sign In
               </Button>
               <Button className="bg-foreground text-background hover:bg-foreground/90">
                 Book Now
               </Button>
-              <MobileMenu links={navLinks} /> {/* Mobile menu toggle */}
+              <MobileMenu links={navLinks} />
             </div>
           </div>
         </div>
@@ -110,13 +112,13 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 leading-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                   Your Health,{" "}
-                  <span className="text-gradient-to-r from-primary to-accent">
+                  <span className="text-primary">
                     Our Priority
                   </span>
                 </h1>
-                <p className="text-xl text-gray-600 leading-relaxed">
+                <p className="text-xl text-muted-foreground leading-relaxed">
                   Book appointments with top-rated doctors instantly. Quality healthcare made accessible and convenient.
                 </p>
               </div>
@@ -160,7 +162,7 @@ export default function HomePage() {
       </section>
 
       {/* Specialties Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-card">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
@@ -247,7 +249,7 @@ export default function HomePage() {
                       </div>
                     </div>
                     <Link href={`/book/${doctor.id}`}>
-                      <Button className="w-full bg-accent hover:bg-accent/90">
+                      <Button className="w-full bg-primary hover:bg-primary/90 text-white">
                         <Calendar className="w-4 h-4 mr-2" />
                         Book Appointment
                       </Button>
@@ -262,7 +264,7 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-card">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">

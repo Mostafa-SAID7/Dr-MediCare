@@ -6,152 +6,131 @@
   .text-balance {
     text-wrap: balance;
   }
+  .shadow-custom {
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+  }
+  /* Override Tailwind gray colors to use theme colors */
+  .text-gray-800 {
+    @apply text-foreground;
+  }
+  .text-gray-600 {
+    @apply text-muted-foreground;
+  }
+  .text-gray-400 {
+    @apply text-muted-foreground/80;
+  }
+  .bg-white {
+    @apply bg-card;
+  }
 }
 
 @layer base {
   :root {
-    --background: 0 0% 95%; /* Slightly darker off-white for contrast */
-    --foreground: 210 10% 15%; /* Darker charcoal */
+    --background: 0 0% 99.2%; /* #fdfdfd */
+    --foreground: 0 0% 0%; /* #000000 */
 
-    --card: 0 0% 100%; /* Pure white */
-    --card-foreground: 210 10% 15%;
+    --card: 0 0% 99.2%; /* #fdfdfd */
+    --card-foreground: 0 0% 0%; /* #000000 */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 210 10% 15%;
+    --popover: 0 0% 98.8%; /* #fcfcfc */
+    --popover-foreground: 0 0% 0%; /* #000000 */
 
-    --primary: 185 80% 45%; /* More saturated Teal */
-    --primary-foreground: 0 0% 100%; /* White */
+    --primary: 262 95% 35%; /* Darker for better contrast and visibility */
+    --primary-foreground: 0 0% 100%; /* #ffffff */
 
-    --secondary: 200 90% 90%; /* More vibrant light blue */
-    --secondary-foreground: 210 10% 15%;
+    --secondary: 216 33% 94%; /* #edf0f4 */
+    --secondary-foreground: 0 0% 3%; /* #080808 */
 
-    --muted: 210 10% 95%; /* Lighter gray */
-    --muted-foreground: 210 10% 45%; /* Medium gray */
+    --muted: 0 0% 96%; /* #f5f5f5 */
+    --muted-foreground: 0 0% 32%; /* #525252 */
 
-    --accent: 240 80% 60%; /* Vibrant Royal Blue */
-    --accent-foreground: 0 0% 100%;
+    --accent: 228 100% 95%; /* #e2ebff */
+    --accent-foreground: 262 56% 56%; /* #7955ca */
 
-    --destructive: 0 80% 55%; /* More vibrant Red */
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 358 71% 60%; /* #e54b4f */
+    --destructive-foreground: 0 0% 100%; /* #ffffff */
 
-    --border: 210 10% 85%;
-    --input: 210 10% 85%;
-    --ring: 185 80% 45%; /* Primary color for ring */
+    --border: 246 18% 92%; /* #e7e7ee */
+    --input: 0 0% 92%; /* #ebebeb */
+    --ring: 0 0% 0%; /* #000000 */
 
     --radius: 0.5rem;
 
-    /* Sidebar colors - align with new theme */
-    --sidebar-background: 210 10% 15%; /* Darker background for sidebar */
-    --sidebar-foreground: 210 10% 90%;
-    --sidebar-primary: 185 60% 60%; /* Lighter primary for sidebar items */
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 70% 70%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 210 10% 25%;
-    --sidebar-ring: 185 60% 60%;
+    --chart-1: 151 54% 53%; /* #4ac885 */
+    --chart-2: 262 100% 60%; /* #7033ff */
+    --chart-3: 24 98% 58%; /* #fd822b */
+    --chart-4: 213 75% 54%; /* #3276e4 */
+    --chart-5: 0 0% 45%; /* #747474 */
+
+    --sidebar-background: 210 33% 97%; /* #f5f8fb */
+    --sidebar-foreground: 0 0% 0%; /* #000000 */
+    --sidebar-primary: 0 0% 0%; /* #000000 */
+    --sidebar-primary-foreground: 0 0% 100%; /* #ffffff */
+    --sidebar-accent: 0 0% 92%; /* #ebebeb */
+    --sidebar-accent-foreground: 0 0% 0%; /* #000000 */
+    --sidebar-border: 0 0% 92%; /* #ebebeb */
+    --sidebar-ring: 0 0% 0%; /* #000000 */
   }
 
   .dark {
-    --background: 210 10% 8%; /* Even darker background */
-    --foreground: 210 10% 95%; /* Light charcoal */
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
 
-    --card: 210 10% 15%; /* Darker card */
-    --card-foreground: 210 10% 95%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 210 10% 15%;
-    --popover-foreground: 210 10% 95%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 185 80% 65%; /* Lighter, more saturated Teal for dark mode */
-    --primary-foreground: 210 10% 8%; /* Dark text on primary */
+    --primary: 262 95% 55%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 200 20% 15%; /* Dark blue */
-    --secondary-foreground: 210 10% 95%;
+    --secondary: 216 15% 20%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 210 10% 20%;
-    --muted-foreground: 210 10% 60%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 60%;
 
-    --accent: 240 80% 75%; /* Lighter, more vibrant Royal Blue for dark mode */
-    --accent-foreground: 210 10% 8%;
+    --accent: 228 50% 25%;
+    --accent-foreground: 262 56% 75%;
 
-    --destructive: 0 70% 60%;
+    --destructive: 358 71% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 10% 20%;
-    --input: 210 10% 20%;
-    --ring: 185 80% 65%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 0% 100%;
 
-    /* Sidebar colors - align with new theme */
-    --sidebar-background: 210 10% 5%;
-    --sidebar-foreground: 210 10% 95%;
-    --sidebar-primary: 185 60% 70%;
-    --sidebar-primary-foreground: 210 10% 5%;
-    --sidebar-accent: 210 70% 80%;
-    --sidebar-accent-foreground: 210 10% 5%;
-    --sidebar-border: 210 10% 30%;
-    --sidebar-ring: 185 60% 70%;
+    --chart-1: 151 54% 53%;
+    --chart-2: 262 100% 70%;
+    --chart-3: 24 98% 58%;
+    --chart-4: 213 75% 60%;
+    --chart-5: 0 0% 55%;
+
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 20%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 0 0% 100%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    /* Subtle background pattern */
+    font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.03) 1px, transparent 0);
     background-size: 20px 20px;
   }
-}
-
-/* Custom animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.6s ease-out;
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Loading animation improvements */
-.loading-pulse {
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: .5;
-  }
-}
-
-/* Responsive improvements */
-@media (max-width: 640px) {
-  .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
-
-/* Focus states for accessibility */
-.focus-visible:focus {
-  outline: 2px solid hsl(var(--primary));
-  outline-offset: 2px;
 }
 
 /* Custom scrollbar */
@@ -160,7 +139,7 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: hsl(var(--muted));
 }
 
 ::-webkit-scrollbar-thumb {

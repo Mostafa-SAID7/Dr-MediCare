@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import { MobileMenu } from '@/components/mobile-menu'
+import { ThemeToggle } from '@/components/theme-toggle'
 
 const doctorsData = {
   'sarah-johnson': {
@@ -167,6 +168,7 @@ export default function DoctorDetailPage() {
               ))}
             </nav>
             <div className="flex items-center space-x-4">
+              <ThemeToggle />
               <Link href="/doctors">
                 <Button variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
                   <ArrowLeft className="w-4 h-4 mr-2" />
