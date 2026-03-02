@@ -12,6 +12,8 @@ import { MobileMenu } from "@/components/mobile-menu"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Footer } from "@/components/footer"
 
+import { slugify } from "@/lib/utils"
+
 const doctors = [
   {
     id: 1,
@@ -228,15 +230,7 @@ export default function DoctorsPage() {
         {/* Doctors Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredDoctors.map((doctor) => {
-            const slugMap: Record<number, string> = {
-              1: 'sarah-johnson',
-              2: 'michael-chen',
-              3: 'emily-rodriguez',
-              4: 'james-wilson',
-              5: 'lisa-park',
-              6: 'robert-taylor'
-            }
-            const slug = slugMap[doctor.id]
+            const slug = slugify(doctor.name)
             
             return (
             <Card key={doctor.id} className="group hover:shadow-xl transition-all duration-300 overflow-hidden rounded-lg shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer">

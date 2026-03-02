@@ -15,6 +15,8 @@ import { useParams, useRouter } from "next/navigation"
 import { MobileMenu } from "@/components/mobile-menu"
 import { Footer } from "@/components/footer"
 
+import { formatCurrency } from "@/lib/utils"
+
 const doctors = {
   "1": {
     id: 1,
@@ -191,7 +193,7 @@ export default function BookAppointmentPage() {
                   <Badge className="bg-primary text-white">Available Today</Badge>
                   <div className="pt-4 border-t">
                     <p className="text-sm text-gray-600">Consultation Fee</p>
-                    <p className="text-2xl font-bold text-accent">${doctor.consultationFee}</p>
+                    <p className="text-2xl font-bold text-accent">{formatCurrency(doctor.consultationFee)}</p>
                   </div>
                 </div>
               </CardContent>
@@ -269,15 +271,15 @@ export default function BookAppointmentPage() {
                   <RadioGroup value={appointmentType} onValueChange={setAppointmentType}>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="consultation" id="consultation" />
-                      <Label htmlFor="consultation">General Consultation - ${doctor.consultationFee}</Label>
+                      <Label htmlFor="consultation">General Consultation - {formatCurrency(doctor.consultationFee)}</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="followup" id="followup" />
-                      <Label htmlFor="followup">Follow-up Visit - ${doctor.consultationFee - 30}</Label>
+                      <Label htmlFor="followup">Follow-up Visit - {formatCurrency(doctor.consultationFee - 30)}</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="emergency" id="emergency" />
-                      <Label htmlFor="emergency">Emergency Consultation - ${doctor.consultationFee + 50}</Label>
+                      <Label htmlFor="emergency">Emergency Consultation - {formatCurrency(doctor.consultationFee + 50)}</Label>
                     </div>
                   </RadioGroup>
                 </CardContent>
