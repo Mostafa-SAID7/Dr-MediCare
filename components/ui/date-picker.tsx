@@ -52,7 +52,9 @@ export function DatePicker({
           mode="single"
           selected={date}
           onSelect={onDateChange}
-          initialFocus
+          captionLayout="dropdown-months"
+          fromYear={1900}
+          toYear={2030}
         />
       </PopoverContent>
     </Popover>
