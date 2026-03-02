@@ -356,7 +356,7 @@ export default function BookAppointmentPage() {
                     <Checkbox
                       id="terms"
                       checked={agreeTerms}
-                      onCheckedChange={(checked) => setAgreeTerms(checked as boolean)}
+                      onCheckedChange={(checked) => setAgreeTerms(checked === true)}
                     />
                     <Label htmlFor="terms" className="text-sm leading-relaxed">
                       I agree to the{" "}
