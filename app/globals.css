@@ -216,3 +216,169 @@
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--primary) / 0.8);
 }
+
+  /* Hero Background Animations */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+    }
+    33% {
+      transform: translateY(-20px) translateX(10px);
+    }
+    66% {
+      transform: translateY(10px) translateX(-10px);
+    }
+  }
+
+  @keyframes float-delayed {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+    }
+    33% {
+      transform: translateY(20px) translateX(-15px);
+    }
+    66% {
+      transform: translateY(-15px) translateX(15px);
+    }
+  }
+
+  @keyframes float-slow {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-30px) rotate(10deg);
+    }
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes particle-1 {
+    0%, 100% {
+      transform: translate(0, 0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(100px, -100px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes particle-2 {
+    0%, 100% {
+      transform: translate(0, 0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-120px, 80px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes particle-3 {
+    0%, 100% {
+      transform: translate(0, 0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(80px, 120px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes particle-4 {
+    0%, 100% {
+      transform: translate(0, 0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-100px, -80px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes particle-5 {
+    0%, 100% {
+      transform: translate(0, 0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(60px, -120px);
+      opacity: 0;
+    }
+  }
+
+  .animate-float {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float-delayed 10s ease-in-out infinite;
+  }
+
+  .animate-float-slow {
+    animation: float-slow 12s ease-in-out infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 4s ease-in-out infinite;
+  }
+
+  .animate-particle-1 {
+    animation: particle-1 8s ease-in-out infinite;
+  }
+
+  .animate-particle-2 {
+    animation: particle-2 10s ease-in-out infinite 1s;
+  }
+
+  .animate-particle-3 {
+    animation: particle-3 12s ease-in-out infinite 2s;
+  }
+
+  .animate-particle-4 {
+    animation: particle-4 9s ease-in-out infinite 1.5s;
+  }
+
+  .animate-particle-5 {
+    animation: particle-5 11s ease-in-out infinite 0.5s;
+  }
