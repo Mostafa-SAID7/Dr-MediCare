@@ -10,6 +10,7 @@ import { useParams, useRouter } from 'next/navigation'
 import { MobileMenu } from '@/components/mobile-menu'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Footer } from '@/components/footer'
+import { Header } from '@/components/header'
 
 const doctorsData = {
   'sarah-johnson': {
@@ -151,36 +152,17 @@ export default function DoctorDetailPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-gradient-to-r from-primary to-accent shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
-                <Heart className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold text-white">MediCare</span>
-            </Link>
-            <nav className="hidden md:flex space-x-8">
-              {navLinks.map((link) => (
-                <Link key={link.href} href={link.href} className="text-white/90 hover:text-white transition-colors font-medium">
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-            <div className="flex items-center space-x-4">
-              <ThemeToggle />
-              <Link href="/doctors">
-                <Button variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back
-                </Button>
-              </Link>
-              <MobileMenu links={navLinks} />
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header 
+        currentPath="/doctors" 
+        rightContent={
+          <Link href="/doctors">
+            <Button variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back
+            </Button>
+          </Link>
+        }
+      />
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

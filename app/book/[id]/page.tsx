@@ -14,6 +14,7 @@ import Link from "next/link"
 import { useParams, useRouter } from "next/navigation"
 import { MobileMenu } from "@/components/mobile-menu"
 import { Footer } from "@/components/footer"
+import { Header } from "@/components/header"
 
 import { formatCurrency } from "@/lib/utils"
 
@@ -136,35 +137,17 @@ export default function BookAppointmentPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-gradient-to-r from-primary to-accent shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
-                <Heart className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold text-white">MediCare</span>
-            </Link>
-            <nav className="hidden md:flex space-x-8">
-              {navLinks.map((link) => (
-                <Link key={link.href} href={link.href} className={`text-white/90 hover:text-white transition-colors font-medium`}>
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-            <div className="flex items-center space-x-4">
-              <Link href="/doctors">
-                <Button variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Doctors
-                </Button>
-              </Link>
-              <MobileMenu links={navLinks} />
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header 
+        currentPath="/doctors" 
+        rightContent={
+          <Link href="/doctors">
+            <Button variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Doctors
+            </Button>
+          </Link>
+        }
+      />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
