@@ -1,15 +1,13 @@
 "use client"
 
 import { useState } from "react"
-import { Search, Filter, Star, Calendar, MapPin, Clock, Heart, Menu, Phone, Mail } from 'lucide-react'
+import { Search, Star, Calendar, MapPin, Clock } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Link from "next/link"
-import { MobileMenu } from "@/components/mobile-menu"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
 
