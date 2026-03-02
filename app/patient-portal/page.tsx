@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { MobileMenu } from "@/components/mobile-menu"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { Footer } from "@/components/footer"
 
 // Placeholder data for a patient
 const patient = {
@@ -368,74 +369,7 @@ export default function PatientPortalPage() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="bg-gradient-to-r from-primary to-accent text-white py-12 px-4 sm:px-6 lg:px-8 mt-16">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center">
-                  <Heart className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-xl font-bold">MediCare</span>
-              </div>
-              <p className="text-gray-400">
-                Providing quality healthcare services with compassion and excellence.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-                <li><Link href="/doctors" className="hover:text-white transition-colors">Doctors</Link></li>
-                <li><Link href="/appointments" className="hover:text-white transition-colors">Appointments</Link></li>
-                <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
-              <ul className="space-y-2 text-gray-400">
-                <li className="flex items-center">
-                  <Phone className="w-4 h-4 mr-2" />
-                  (555) 123-4567
-                </li>
-                <li className="flex items-center">
-                  <Mail className="w-4 h-4 mr-2" />
-                  info@medicare.com
-                </li>
-                <li className="flex items-center">
-                  <MapPin className="w-4 h-4 mr-2" />
-                  123 Health St, Medical City
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Emergency</h3>
-              <p className="text-gray-400 mb-2">24/7 Emergency Hotline</p>
-              <p className="text-2xl font-bold text-destructive">(555) 911-HELP</p>
-            </div>
-          </div>
-        </div>
-      </footer>
-      
-      {/* Copyright Section */}
-      <div className="bg-black text-white py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="border-t border-gray-800 w-full mb-6"></div>
-          <p className="text-center text-gray-400">
-            &copy; 2024 - {new Date().getFullYear()}{' '}
-            <a 
-              href="https://m-said-portfolio.netlify.app" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-white hover:text-primary transition-colors font-semibold"
-            >
-              M.Said
-            </a>
-            . All rights reserved.
-          </p>
-        </div>
-      </div>
+      <Footer />
     </div>
   )
 }
