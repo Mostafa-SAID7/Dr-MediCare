@@ -58,7 +58,7 @@ export default function HomePage() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 2000)
+    }, 500) // Reduced to 500ms for faster loading
 
     return () => clearTimeout(timer)
   }, [])
