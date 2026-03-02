@@ -69,7 +69,7 @@ export default function PatientPortalPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-secondary to-background">
+    <div className="min-h-screen bg-grid-dots">
       <Header 
         currentPath="/patient-portal" 
         rightContent={

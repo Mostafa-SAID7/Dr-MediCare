@@ -45,7 +45,7 @@ export default function BookAppointmentPage() {
 
   if (!doctor) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-secondary to-background flex items-center justify-center">
+      <div className="min-h-screen bg-grid-dots flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">Doctor not found</h1>
           <Link href="/doctors">
@@ -75,7 +75,7 @@ export default function BookAppointmentPage() {
 
   if (bookingComplete) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-secondary to-background flex items-center justify-center">
+      <div className="min-h-screen bg-grid-dots flex items-center justify-center">
         <Card className="max-w-md mx-auto rounded-lg shadow-sm transition-all duration-300 hover:shadow-md">
           <CardContent className="p-8 text-center">
             <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -100,7 +100,7 @@ export default function BookAppointmentPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-grid-dots">
       <Header 
         currentPath="/doctors" 
         rightContent={
