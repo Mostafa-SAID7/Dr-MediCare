@@ -15,25 +15,31 @@ import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
 import { DoctorAvatar } from "@/components/doctor-avatar"
 import { appointments, statusColors } from "@/data"
+import { useFilter } from "@/hooks"
 
 export default function AppointmentsPage() {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [statusFilter, setStatusFilter] = useState("all")
-  const [dateFilter, setDateFilter] = useState("all")
-
-  const filteredAppointments = appointments.filter(appointment => {
-    const matchesSearch = appointment.doctor.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         appointment.specialty.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesStatus = statusFilter === "all" || appointment.status === statusFilter
-    
-    let matchesDate = true
-    if (dateFilter === "upcoming") {
-      matchesDate = new Date(appointment.date) >= new Date()
-    } else if (dateFilter === "past") {
-      matchesDate = new Date(appointment.date) < new Date()
+  const { 
+    searchTerm, 
+    setSearchTerm, 
+    filters, 
+    setFilter, 
+    clearFilters, 
+    filteredItems 
+  } = useFilter({
+    items: appointments,
+    searchFields: ['doctor', 'specialty'],
+    filterFn: (appointment, filters) => {
+      const matchesStatus = !filters.status || filters.status === "all" || appointment.status === filters.status
+      
+      let matchesDate = true
+      if (filters.date === "upcoming") {
+        matchesDate = new Date(appointment.date) >= new Date()
+      } else if (filters.date === "past") {
+        matchesDate = new Date(appointment.date) < new Date()
+      }
+      
+      return matchesStatus && matchesDate
     }
-    
-    return matchesSearch && matchesStatus && matchesDate
   })
 
   const formatDate = (dateString: string) => {
@@ -184,7 +190,7 @@ export default function AppointmentsPage() {
 
         {/* Appointments List */}
         <div className="space-y-4">
-          {filteredAppointments.map((appointment) => (
+          {filteredItems.map((appointment) => (
             <Card key={appointment.id} className="hover:shadow-lg transition-shadow rounded-lg shadow-sm transition-all duration-300 hover:shadow-md">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
@@ -272,7 +278,7 @@ export default function AppointmentsPage() {
         </div>
 
         {/* No Results */}
-        {filteredAppointments.length === 0 && (
+        {filteredItems.length === 0 && (
           <Empty>
             <EmptyHeader>
               <EmptyMedia>
@@ -280,20 +286,16 @@ export default function AppointmentsPage() {
               </EmptyMedia>
               <EmptyTitle>No appointments found</EmptyTitle>
               <EmptyDescription>
-                {searchTerm || statusFilter !== "all" || dateFilter !== "all" 
+                {searchTerm || filters.status || filters.date 
                   ? "We couldn't find any appointments matching your criteria. Try adjusting your filters." 
                   : "You don't have any appointments scheduled yet. Book your first appointment with one of our expert doctors."}
               </EmptyDescription>
             </EmptyHeader>
             <EmptyContent>
               <div className="flex flex-col sm:flex-row gap-3">
-                {(searchTerm || statusFilter !== "all" || dateFilter !== "all") && (
+                {(searchTerm || filters.status || filters.date) && (
                   <Button 
-                    onClick={() => {
-                      setSearchTerm("")
-                      setStatusFilter("all")
-                      setDateFilter("all")
-                    }}
+                    onClick={clearFilters}
                     variant="outline"
                     size="lg"
                   >

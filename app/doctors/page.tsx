@@ -12,28 +12,36 @@ import Link from "next/link"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
 import { doctors, specialtyList } from "@/data"
-
+import { useFilter } from "@/hooks"
 import { slugify } from "@/lib/utils"
 
 export default function DoctorsPage() {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [selectedSpecialty, setSelectedSpecialty] = useState("All Specialties")
   const [sortBy, setSortBy] = useState("rating")
+  
+  const { 
+    searchTerm, 
+    setSearchTerm, 
+    filters, 
+    setFilter, 
+    clearFilters, 
+    filteredItems 
+  } = useFilter({
+    items: doctors,
+    searchFields: ['name', 'specialty'],
+    filterFn: (doctor, filters) => {
+      if (filters.specialty && filters.specialty !== "All Specialties") {
+        return doctor.specialty === filters.specialty
+      }
+      return true
+    }
+  })
 
-  const filteredDoctors = doctors
-    .filter(doctor => {
-      const matchesSearch = doctor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           doctor.specialty.toLowerCase().includes(searchTerm.toLowerCase())
-      const matchesSpecialty = selectedSpecialty === "All Specialties" || 
-                              doctor.specialty === selectedSpecialty
-      return matchesSearch && matchesSpecialty
-    })
-    .sort((a, b) => {
-      if (sortBy === "rating") return b.rating - a.rating
-      if (sortBy === "experience") return parseInt(b.experience) - parseInt(a.experience)
-      if (sortBy === "fee") return parseInt(a.consultationFee.replace("$", "")) - parseInt(b.consultationFee.replace("$", ""))
-      return 0
-    })
+  const sortedDoctors = [...filteredItems].sort((a, b) => {
+    if (sortBy === "rating") return b.rating - a.rating
+    if (sortBy === "experience") return parseInt(b.experience) - parseInt(a.experience)
+    if (sortBy === "fee") return parseInt(a.consultationFee.replace("$", "")) - parseInt(b.consultationFee.replace("$", ""))
+    return 0
+  })
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-secondary to-background">
@@ -71,7 +79,7 @@ export default function DoctorsPage() {
                 />
               </div>
             </div>
-            <Select value={selectedSpecialty} onValueChange={setSelectedSpecialty}>
+            <Select value={filters.specialty || "All Specialties"} onValueChange={(value) => setFilter('specialty', value)}>
               <SelectTrigger>
                 <SelectValue placeholder="Select specialty" />
               </SelectTrigger>
@@ -99,14 +107,14 @@ export default function DoctorsPage() {
         {/* Results Count */}
         <div className="mb-6">
           <p className="text-gray-600">
-            Showing {filteredDoctors.length} doctor{filteredDoctors.length !== 1 ? 's' : ''}
-            {selectedSpecialty !== "All Specialties" && ` in ${selectedSpecialty}`}
+            Showing {sortedDoctors.length} doctor{sortedDoctors.length !== 1 ? 's' : ''}
+            {filters.specialty && filters.specialty !== "All Specialties" && ` in ${filters.specialty}`}
           </p>
         </div>
 
         {/* Doctors Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredDoctors.map((doctor) => {
+          {sortedDoctors.map((doctor) => {
             const slug = slugify(doctor.name)
             
             return (
@@ -179,7 +187,7 @@ export default function DoctorsPage() {
         </div>
 
         {/* No Results */}
-        {filteredDoctors.length === 0 && (
+        {sortedDoctors.length === 0 && (
           <Empty>
             <EmptyHeader>
               <EmptyMedia>
@@ -194,10 +202,7 @@ export default function DoctorsPage() {
             </EmptyHeader>
             <EmptyContent>
               <Button 
-                onClick={() => {
-                  setSearchTerm("")
-                  setSelectedSpecialty("All Specialties")
-                }}
+                onClick={clearFilters}
                 size="lg"
                 className="gap-2"
               >
