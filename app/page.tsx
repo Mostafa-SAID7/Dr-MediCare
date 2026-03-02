@@ -90,7 +90,7 @@ export default function HomePage() {
                   <div className="text-gray-600 mt-2">Expert Doctors</div>
                 </div>
                 <div className="text-center group">
-                  <div className="text-3xl font-bold text-accent neon-stat border-2 border-accent/30 rounded-lg p-4 bg-accent/5 hover:border-accent/60 transition-all duration-300">
+                  <div className="text-3xl font-bold text-primary neon-stat border-2 border-primary/30 rounded-lg p-4 bg-primary/5 hover:border-primary/60 transition-all duration-300">
                     50k+
                   </div>
                   <div className="text-gray-600 mt-2">Happy Patients</div>

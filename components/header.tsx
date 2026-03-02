@@ -61,13 +61,13 @@ export function Header({ currentPath = '/', rightContent }: HeaderProps) {
                 <>
                   <Button 
                     variant="outline" 
-                    className="hidden sm:inline-flex bg-foreground text-background hover:bg-foreground/90"
+                    className="hidden sm:inline-flex !bg-white !text-primary hover:!bg-white/90 !border-white"
                     onClick={() => setAuthModalOpen(true)}
                   >
                     Sign In
                   </Button>
                   <Button 
-                    className="bg-foreground text-background hover:bg-foreground/90"
+                    className="!bg-white !text-primary hover:!bg-white/90"
                     onClick={() => setBookingModalOpen(true)}
                   >
                     Book Now
