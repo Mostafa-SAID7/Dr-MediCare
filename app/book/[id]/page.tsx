@@ -14,27 +14,15 @@ import Link from "next/link"
 import { useParams, useRouter } from "next/navigation"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
-import { getDoctorById } from "@/data"
+import { getDoctorById, timeSlots, getAvailableDates, appointmentTypes, paymentMethods } from "@/data"
 import { formatCurrency } from "@/lib/utils"
-
-const timeSlots = [
-  "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
-  "14:00", "14:30", "15:00", "15:30", "16:00", "16:30"
-]
-
-const dates = [
-  { date: "2024-01-15", day: "Today", dayName: "Monday" },
-  { date: "2024-01-16", day: "Tomorrow", dayName: "Tuesday" },
-  { date: "2024-01-17", day: "Jan 17", dayName: "Wednesday" },
-  { date: "2024-01-18", day: "Jan 18", dayName: "Thursday" },
-  { date: "2024-01-19", day: "Jan 19", dayName: "Friday" },
-]
 
 export default function BookAppointmentPage() {
   const params = useParams()
   const router = useRouter()
   const doctorId = parseInt(params.id as string)
   const doctor = getDoctorById(doctorId)
+  const dates = getAvailableDates()
 
   const [selectedDate, setSelectedDate] = useState("")
   const [selectedTime, setSelectedTime] = useState("")
