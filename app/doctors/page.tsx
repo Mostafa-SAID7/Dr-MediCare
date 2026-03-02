@@ -151,7 +151,7 @@ export default function DoctorsPage() {
                   </div>
 
                   <div className="flex flex-wrap gap-1">
-                    {doctor.languages.map((language) => (
+                    {doctor.languages?.map((language) => (
                       <Badge key={language} variant="secondary" className="text-xs">
                         {language}
                       </Badge>
