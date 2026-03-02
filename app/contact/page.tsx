@@ -9,7 +9,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Link from "next/link"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
 import { toast } from 'sonner'
@@ -316,48 +315,6 @@ export default function ContactPage() {
               </CardContent>
             </Card>
           </div>
-        </div>
-
-        {/* FAQ Section */}
-        <div className="mt-16">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-gray-600">
-              Quick answers to common questions
-            </p>
-          </div>
-          
-          <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto">
-            <AccordionItem value="item-1" className="border-b border-border">
-              <AccordionTrigger className="text-lg font-semibold text-foreground hover:no-underline">How do I book an appointment?</AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                You can book an appointment online through our website, call our support line, or visit our clinic directly. Online booking is available 24/7.
-              </AccordionContent>
-            </AccordionItem>
-            
-            <AccordionItem value="item-2" className="border-b border-border">
-              <AccordionTrigger className="text-lg font-semibold text-foreground hover:no-underline">What insurance do you accept?</AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                We accept most major insurance plans. Please contact us with your insurance information to verify coverage before your appointment.
-              </AccordionContent>
-            </AccordionItem>
-            
-            <AccordionItem value="item-3" className="border-b border-border">
-              <AccordionTrigger className="text-lg font-semibold text-foreground hover:no-underline">Can I reschedule my appointment?</AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                Yes, you can reschedule your appointment up to 24 hours before your scheduled time through our website or by calling our support team.
-              </AccordionContent>
-            </AccordionItem>
-            
-            <AccordionItem value="item-4" className="border-b border-border">
-              <AccordionTrigger className="text-lg font-semibold text-foreground hover:no-underline">Do you offer telemedicine?</AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                Yes, we offer virtual consultations for many types of appointments. You can select this option when booking your appointment online.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
         </div>
       </div>
 

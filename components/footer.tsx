@@ -37,14 +37,14 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Services */}
+            {/* Support */}
             <div className="lg:pl-8 lg:border-l border-white/20">
-              <h3 className="font-bold text-white mb-4">Services</h3>
+              <h3 className="font-bold text-white mb-4">Support</h3>
               <ul className="space-y-2 text-white/80">
-                <li><a href="#" className="hover:text-white transition-colors">General Consultation</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Specialist Care</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Emergency Services</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Health Checkups</a></li>
+                <li><Link href="/faq" className="hover:text-white transition-colors">FAQ</Link></li>
+                <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
+                <li><Link href="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link></li>
+                <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
               </ul>
             </div>
 
