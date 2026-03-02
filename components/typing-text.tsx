@@ -66,29 +66,21 @@ export function TypingText({
         @keyframes neon-pulse {
           0%, 100% {
             text-shadow: 
-              0 0 10px currentColor,
-              0 0 20px currentColor,
-              0 0 30px currentColor,
-              0 0 40px currentColor;
+              0 0 3px currentColor,
+              0 0 6px currentColor;
           }
           50% {
             text-shadow: 
-              0 0 5px currentColor,
-              0 0 10px currentColor,
-              0 0 15px currentColor,
-              0 0 20px currentColor;
+              0 0 2px currentColor,
+              0 0 4px currentColor;
           }
         }
 
         .neon-text {
           text-shadow: 
-            0 0 10px currentColor,
-            0 0 20px currentColor,
-            0 0 30px currentColor,
-            0 0 40px currentColor,
-            0 0 70px currentColor,
-            0 0 80px currentColor,
-            0 0 100px currentColor;
+            0 0 3px currentColor,
+            0 0 6px currentColor,
+            0 0 9px currentColor;
         }
 
         .animate-neon-pulse {

@@ -119,7 +119,7 @@ export default function AppointmentsPage() {
                 />
               </div>
             </div>
-            <Select value={statusFilter} onValueChange={setStatusFilter}>
+            <Select value={filters.status || "all"} onValueChange={(value) => setFilter('status', value)}>
               <SelectTrigger>
                 <SelectValue placeholder="Filter by status" />
               </SelectTrigger>
@@ -131,7 +131,7 @@ export default function AppointmentsPage() {
                 <SelectItem value="cancelled">Cancelled</SelectItem>
               </SelectContent>
             </Select>
-            <Select value={dateFilter} onValueChange={setDateFilter}>
+            <Select value={filters.date || "all"} onValueChange={(value) => setFilter('date', value)}>
               <SelectTrigger>
                 <SelectValue placeholder="Filter by date" />
               </SelectTrigger>

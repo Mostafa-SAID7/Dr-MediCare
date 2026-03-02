@@ -1,5 +1,7 @@
 "use client"
 
+import { useState } from 'react'
+import Link from 'next/link'
 import { Calendar, Clock, Phone, Shield, Award, Heart } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -10,11 +12,13 @@ import { PageHeader } from "@/components/page-header"
 import { DoctorCard } from "@/components/doctor-card"
 import { SectionContainer } from "@/components/section-container"
 import { TypingText } from "@/components/typing-text"
+import { EmergencyModal } from "@/components/emergency-modal"
 import { doctors, specialties } from "@/data"
 import { useLoading } from "@/hooks"
 
 export default function HomePage() {
   const isLoading = useLoading(500)
+  const [emergencyModalOpen, setEmergencyModalOpen] = useState(false)
 
   if (isLoading) {
     return <Loader />
@@ -58,15 +62,8 @@ export default function HomePage() {
               <div className="space-y-4">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                   <TypingText 
-                    text="Your Health, " 
+                    text="Your Health, Our Priority" 
                     speed={80}
-                    className="text-foreground"
-                  />
-                  <br />
-                  <TypingText 
-                    text="Our Priority" 
-                    speed={80}
-                    delay={1200}
                     neon
                     className="text-primary"
                   />
@@ -76,29 +73,58 @@ export default function HomePage() {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="text-lg px-8 py-3">
-                  <Calendar className="w-5 h-5 mr-2" />
-                  Book Appointment
+                <Button asChild size="lg" className="text-lg px-8 py-3">
+                  <Link href="/doctors">
+                    <Calendar className="w-5 h-5 mr-2" />
+                    Book Appointment
+                  </Link>
                 </Button>
-                <Button size="lg" variant="destructive" className="text-lg px-8 py-3">
+                <Button 
+                  size="lg" 
+                  variant="destructive" 
+                  className="text-lg px-8 py-3"
+                  onClick={() => setEmergencyModalOpen(true)}
+                >
                   <Phone className="w-5 h-5 mr-2" />
                   Emergency Call
                 </Button>
               </div>
               <div className="grid grid-cols-3 gap-8 pt-8">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-primary">500+</div>
-                  <div className="text-gray-600">Expert Doctors</div>
+                <div className="text-center group">
+                  <div className="text-3xl font-bold text-primary neon-stat border-2 border-primary/30 rounded-lg p-4 bg-primary/5 hover:border-primary/60 transition-all duration-300">
+                    500+
+                  </div>
+                  <div className="text-gray-600 mt-2">Expert Doctors</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-accent">50k+</div>
-                  <div className="text-gray-600">Happy Patients</div>
+                <div className="text-center group">
+                  <div className="text-3xl font-bold text-accent neon-stat border-2 border-accent/30 rounded-lg p-4 bg-accent/5 hover:border-accent/60 transition-all duration-300">
+                    50k+
+                  </div>
+                  <div className="text-gray-600 mt-2">Happy Patients</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-secondary-foreground">24/7</div>
-                  <div className="text-gray-600">Support</div>
+                <div className="text-center group">
+                  <div className="text-3xl font-bold text-secondary-foreground neon-stat border-2 border-secondary-foreground/30 rounded-lg p-4 bg-secondary-foreground/5 hover:border-secondary-foreground/60 transition-all duration-300">
+                    24/7
+                  </div>
+                  <div className="text-gray-600 mt-2">Support</div>
                 </div>
               </div>
+              
+              <style jsx>{`
+                .neon-stat {
+                  box-shadow: 
+                    0 0 3px currentColor,
+                    0 0 6px currentColor,
+                    inset 0 0 3px currentColor;
+                }
+                
+                .neon-stat:hover {
+                  box-shadow: 
+                    0 0 6px currentColor,
+                    0 0 12px currentColor,
+                    inset 0 0 6px currentColor;
+                }
+              `}</style>
             </div>
             <div className="relative">
               <div className="relative z-10">
@@ -205,6 +231,8 @@ export default function HomePage() {
       </section>
 
       <Footer />
+      
+      <EmergencyModal open={emergencyModalOpen} onOpenChange={setEmergencyModalOpen} />
     </div>
   )
 }

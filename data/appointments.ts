@@ -69,7 +69,7 @@ export const patientAppointments: Appointment[] = [
     status: "confirmed",
     type: "consultation",
     location: "Downtown Medical Center",
-    image: "/sketch-cardiologist-sarah.jpg",
+    image: "/sketch-cardiologist-sarah.png",
     reason: "Annual checkup"
   },
   {
