@@ -1,5 +1,6 @@
 import { Calendar, Star, MapPin, Clock } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -29,10 +30,11 @@ export function DoctorCard({ doctor }: DoctorCardProps) {
     <Card className="group hover:shadow-xl transition-all duration-300 overflow-hidden rounded-lg shadow-sm cursor-pointer">
       <Link href={`/doctors/${slug}`} className="block">
         <div className="relative h-48 bg-gradient-to-br from-primary/5 to-accent/5 flex items-center justify-center overflow-hidden">
-          <img
-            loading="lazy"
+          <Image
             src={doctor.image}
             alt={doctor.name}
+            width={400}
+            height={300}
             className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
           />
           <Badge className="absolute top-4 right-4 bg-primary">

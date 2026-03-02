@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { Calendar, Clock, Phone, Shield, Award, Heart } from 'lucide-react'
 import { Button } from "@/components/ui/button"
@@ -121,11 +122,12 @@ export default function HomePage() {
             </div>
             <div className="relative">
               <div className="relative z-10">
-                <img
-                  loading="eager"
-                  fetchPriority="high"
+                <Image
                   src="/modern-medical-consultation-sketch.png"
                   alt="Medical consultation"
+                  width={600}
+                  height={400}
+                  priority
                   className="rounded-2xl shadow-2xl"
                 />
               </div>
