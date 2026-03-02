@@ -156,7 +156,7 @@ export default function HomePage() {
       </SectionContainer>
 
       {/* Featured Doctors */}
-      <SectionContainer background="muted">
+      <SectionContainer background="dots">
         <PageHeader 
           title="Featured Doctors"
           description="Meet our top-rated healthcare professionals"

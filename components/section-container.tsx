@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 interface SectionContainerProps {
   children: ReactNode
   className?: string
-  background?: 'default' | 'card' | 'muted'
+  background?: 'default' | 'card' | 'muted' | 'dots'
 }
 
 export function SectionContainer({ 
@@ -14,7 +14,8 @@ export function SectionContainer({
   const bgClass = {
     default: '',
     card: 'bg-card',
-    muted: 'bg-muted'
+    muted: 'bg-muted',
+    dots: 'bg-grid-dots'
   }[background]
 
   return (
