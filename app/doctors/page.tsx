@@ -12,7 +12,6 @@ import { MobileMenu } from "@/components/mobile-menu"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
-import { Button } from "@/components/ui/button"
 
 import { slugify } from "@/lib/utils"
 
