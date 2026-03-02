@@ -8,12 +8,16 @@ const fontSans = Exo({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
+  preload: true,
+  fallback: ['system-ui', 'arial'],
 })
 
 const fontSerif = Source_Serif_4({ 
   subsets: ['latin'],
   variable: '--font-serif',
   display: 'swap',
+  preload: false,
+  fallback: ['georgia', 'serif'],
 })
 
 const fontMono = IBM_Plex_Mono({ 
@@ -21,6 +25,8 @@ const fontMono = IBM_Plex_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
   display: 'swap',
+  preload: false,
+  fallback: ['monospace'],
 })
 
 export const metadata: Metadata = {
@@ -30,6 +36,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'MediCare' }],
   creator: 'MediCare',
   publisher: 'MediCare',
+  verification: {
+    google: 'qYjGxU4mga3JQ4zSBL_ILdle0h5BVFPaNMx543Os9jU',
+  },
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },
@@ -106,6 +115,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${fontSans.variable} ${fontSerif.variable} ${fontMono.variable}`} suppressHydrationWarning>
       <head>
+        <meta name="google-site-verification" content="qYjGxU4mga3JQ4zSBL_ILdle0h5BVFPaNMx543Os9jU" />
         <style>{`
 html {
   font-family: var(--font-sans);

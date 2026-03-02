@@ -47,7 +47,8 @@ export function Header({ currentPath = '/', rightContent }: HeaderProps) {
                 return (
                   <Link 
                     key={link.href} 
-                    href={link.href} 
+                    href={link.href}
+                    prefetch={true}
                     className={`text-white/90 hover:text-white transition-colors font-medium ${
                       isActive ? 'text-white font-bold border-b-2 border-white' : ''
                     }`}

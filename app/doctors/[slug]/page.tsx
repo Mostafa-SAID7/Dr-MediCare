@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { Star, Calendar, Award, User, Phone, Mail, MapPin, ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -51,10 +52,11 @@ export default function DoctorDetailPage() {
               <CardContent className="p-6">
                 <div className="text-center space-y-4">
                   <div className="w-48 h-48 rounded-lg mx-auto overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                    <img
-                      loading="lazy"
+                    <Image
                       src={doctor.image}
                       alt={doctor.name}
+                      width={192}
+                      height={192}
                       className="w-full h-full object-cover"
                     />
                   </div>

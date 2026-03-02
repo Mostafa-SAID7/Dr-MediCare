@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { Calendar, Clock, User, CreditCard, ArrowLeft, Check } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -126,10 +127,11 @@ export default function BookAppointmentPage() {
               <CardContent className="p-6">
                 <div className="text-center space-y-4">
                   <div className="w-24 h-24 rounded-full mx-auto overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                    <img
-                      loading="lazy"
+                    <Image
                       src={doctor.image}
                       alt={doctor.name}
+                      width={96}
+                      height={96}
                       className="w-full h-full object-cover"
                     />
                   </div>

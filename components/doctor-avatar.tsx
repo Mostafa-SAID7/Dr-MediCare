@@ -1,4 +1,5 @@
 import { User } from 'lucide-react'
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 interface DoctorAvatarProps {
@@ -47,11 +48,15 @@ export function DoctorAvatar({
   const colorClass = colors[colorIndex]
 
   if (image && !image.includes('simple-line-sketch')) {
+    const sizeMap = { sm: 48, md: 64, lg: 96 }
+    const pixelSize = sizeMap[size]
+    
     return (
-      <img
-        loading="lazy"
+      <Image
         src={image}
         alt={name}
+        width={pixelSize}
+        height={pixelSize}
         className={cn(
           sizeClasses[size],
           'rounded-full object-cover',

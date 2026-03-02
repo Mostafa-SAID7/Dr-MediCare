@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { User, Calendar, Clock, Edit, LogOut } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -120,10 +121,11 @@ export default function PatientPortalPage() {
               </CardHeader>
               <CardContent className="pt-4">
                 <div className="flex flex-col items-center space-y-4 mb-6">
-                  <img
-                    loading="lazy"
+                  <Image
                     src="/user-profile-sketch.png"
                     alt="Patient Profile"
+                    width={96}
+                    height={96}
                     className="w-24 h-24 rounded-full mx-auto object-cover border-2 border-primary"
                   />
                   <h3 className="text-xl font-semibold text-foreground">
