@@ -14,7 +14,6 @@ import Link from "next/link"
 import { useParams, useRouter } from "next/navigation"
 import { MobileMenu } from "@/components/mobile-menu"
 import { Footer } from "@/components/footer"
-import { Footer } from "@/components/footer"
 
 const doctors = {
   "1": {
