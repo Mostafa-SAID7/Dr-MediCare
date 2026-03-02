@@ -1,4 +1,4 @@
-import { Calendar, Star } from 'lucide-react'
+import { Calendar, Star, MapPin, Clock } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -15,6 +15,10 @@ interface DoctorCardProps {
     image: string
     nextAvailable: string
     consultationFee: string
+    education?: string
+    reviews?: number
+    location?: string
+    languages?: string[]
   }
 }
 
@@ -40,30 +44,59 @@ export function DoctorCard({ doctor }: DoctorCardProps) {
           <Link href={`/doctors/${slug}`} className="block hover:opacity-80 transition-opacity">
             <h3 className="text-xl font-semibold text-gray-800">{doctor.name}</h3>
             <p className="text-primary font-medium">{doctor.specialty}</p>
+            {doctor.education && (
+              <p className="text-sm text-gray-600">{doctor.education}</p>
+            )}
           </Link>
-          <div className="flex items-center justify-between text-sm text-gray-600">
+          
+          <div className="flex items-center justify-between text-sm">
             <div className="flex items-center">
               <Star className="w-4 h-4 text-yellow-400 fill-current mr-1" />
-              <span>{doctor.rating}</span>
+              <span className="font-medium">{doctor.rating}</span>
+              {doctor.reviews && (
+                <span className="text-gray-600 ml-1">({doctor.reviews} reviews)</span>
+              )}
             </div>
-            <span>{doctor.experience}</span>
+            <span className="text-gray-600">{doctor.experience}</span>
           </div>
-          <div className="flex items-center justify-between">
+
+          {(doctor.location || doctor.nextAvailable) && (
+            <div className="space-y-2 text-sm text-gray-600">
+              {doctor.location && (
+                <div className="flex items-center">
+                  <MapPin className="w-4 h-4 mr-2" />
+                  <span>{doctor.location}</span>
+                </div>
+              )}
+              <div className="flex items-center">
+                <Clock className="w-4 h-4 mr-2" />
+                <span>Next: {doctor.nextAvailable}</span>
+              </div>
+            </div>
+          )}
+
+          {doctor.languages && doctor.languages.length > 0 && (
+            <div className="flex flex-wrap gap-1">
+              {doctor.languages.map((language) => (
+                <Badge key={language} variant="secondary" className="text-xs">
+                  {language}
+                </Badge>
+              ))}
+            </div>
+          )}
+
+          <div className="flex items-center justify-between pt-4 border-t">
             <div>
-              <p className="text-sm text-gray-600">Next available</p>
-              <p className="font-medium text-gray-800">{doctor.nextAvailable}</p>
+              <p className="text-sm text-gray-600">Consultation Fee</p>
+              <p className="font-bold text-accent text-lg">{doctor.consultationFee}</p>
             </div>
-            <div className="text-right">
-              <p className="text-sm text-gray-600">Consultation</p>
-              <p className="font-bold text-accent">{doctor.consultationFee}</p>
-            </div>
+            <Link href={`/book/${doctor.id}`}>
+              <Button>
+                <Calendar className="w-4 h-4 mr-2" />
+                Book Now
+              </Button>
+            </Link>
           </div>
-          <Link href={`/book/${doctor.id}`}>
-            <Button className="w-full">
-              <Calendar className="w-4 h-4 mr-2" />
-              Book Appointment
-            </Button>
-          </Link>
         </div>
       </CardContent>
     </Card>

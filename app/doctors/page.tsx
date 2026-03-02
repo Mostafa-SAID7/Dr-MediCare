@@ -1,19 +1,16 @@
 "use client"
 
 import { useState } from "react"
-import { Search, Star, Calendar, MapPin, Clock } from 'lucide-react'
+import { Search } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription, EmptyContent } from '@/components/ui/empty'
-import Link from "next/link"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
+import { DoctorCard } from "@/components/doctor-card"
 import { doctors, specialtyList } from "@/data"
 import { useFilter } from "@/hooks"
-import { slugify } from "@/lib/utils"
 
 export default function DoctorsPage() {
   const [sortBy, setSortBy] = useState("rating")
@@ -114,76 +111,9 @@ export default function DoctorsPage() {
 
         {/* Doctors Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {sortedDoctors.map((doctor) => {
-            const slug = slugify(doctor.name)
-            
-            return (
-            <Card key={doctor.id} className="group hover:shadow-xl transition-all duration-300 overflow-hidden rounded-lg shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer">
-              <Link href={`/doctors/${slug}`} className="block">
-              <div className="relative">
-                <img
-                  src={doctor.image}
-                  alt={doctor.name}
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <Badge className="absolute top-4 right-4 bg-primary">
-                  Available
-                </Badge>
-              </div>
-              </Link>
-              <CardContent className="p-6">
-                <div className="space-y-4">
-                  <Link href={`/doctors/${slug}`} className="block hover:opacity-80 transition-opacity">
-                    <h3 className="text-xl font-semibold text-gray-800">{doctor.name}</h3>
-                    <p className="text-primary font-medium">{doctor.specialty}</p>
-                    <p className="text-sm text-gray-600">{doctor.education}</p>
-                  </Link>
-                  
-                  <div className="flex items-center justify-between text-sm">
-                    <div className="flex items-center">
-                      <Star className="w-4 h-4 text-yellow-400 fill-current mr-1" />
-                      <span className="font-medium">{doctor.rating}</span>
-                      <span className="text-gray-600 ml-1">({doctor.reviews} reviews)</span>
-                    </div>
-                    <span className="text-gray-600">{doctor.experience}</span>
-                  </div>
-
-                  <div className="space-y-2 text-sm text-gray-600">
-                    <div className="flex items-center">
-                      <MapPin className="w-4 h-4 mr-2" />
-                      <span>{doctor.location}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <Clock className="w-4 h-4 mr-2" />
-                      <span>Next: {doctor.nextAvailable}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-1">
-                    {doctor.languages?.map((language) => (
-                      <Badge key={language} variant="secondary" className="text-xs">
-                        {language}
-                      </Badge>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center justify-between pt-4 border-t">
-                    <div>
-                      <p className="text-sm text-gray-600">Consultation Fee</p>
-                      <p className="font-bold text-accent text-lg">{doctor.consultationFee}</p>
-                    </div>
-                    <Link href={`/book/${doctor.id}`}>
-                      <Button>
-                        <Calendar className="w-4 h-4 mr-2" />
-                        Book Now
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            )
-          })}
+          {sortedDoctors.map((doctor) => (
+            <DoctorCard key={doctor.id} doctor={doctor} />
+          ))}
         </div>
 
         {/* No Results */}

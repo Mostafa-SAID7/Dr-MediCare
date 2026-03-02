@@ -6,11 +6,12 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Calendar, User, Stethoscope, Clock, Phone, Mail, CheckCircle } from 'lucide-react'
+import { Calendar, User, Stethoscope, Phone, Mail, CheckCircle } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { DoctorAvatar } from '@/components/doctor-avatar'
 import { doctors } from '@/data'
 import Link from 'next/link'
+import { toast } from 'sonner'
 
 interface QuickBookingModalProps {
   open: boolean
@@ -47,6 +48,12 @@ export function QuickBookingModal({ open, onOpenChange }: QuickBookingModalProps
     setTimeout(() => {
       setIsSubmitting(false)
       setIsSuccess(true)
+      
+      // Show success toast
+      toast.success('Appointment Booked!', {
+        description: `Your appointment with ${selectedDoctorData?.name} has been confirmed. Check your email for details.`,
+        duration: 5000,
+      })
       
       // Reset after 2 seconds
       setTimeout(() => {

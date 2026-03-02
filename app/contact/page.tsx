@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Phone, Mail, MapPin, Clock, Heart, Send, MessageSquare, Headphones, AlertCircle, Menu } from 'lucide-react'
+import { Phone, Mail, MapPin, Clock, Send, MessageSquare, AlertCircle } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -9,10 +9,10 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import Link from "next/link"
-import { MobileMenu } from "@/components/mobile-menu"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
+import { toast } from 'sonner'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -35,19 +35,17 @@ export default function ContactPage() {
     
     setIsSubmitting(false)
     setSubmitted(true)
+    
+    // Show success toast
+    toast.success('Message Sent Successfully!', {
+      description: 'Thank you for contacting us. We\'ll get back to you within 24 hours.',
+      duration: 5000,
+    })
   }
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }))
   }
-
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/doctors", label: "Doctors" },
-    { href: "/appointments", label: "Appointments" },
-    { href: "/contact", label: "Contact" },
-    { href: "/patient-portal", label: "Patient Portal" },
-  ]
 
   if (submitted) {
     return (

@@ -18,8 +18,6 @@ interface HeaderProps {
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/doctors", label: "Doctors" },
-  { href: "/services", label: "Services" },
-  { href: "/about", label: "About" },
   { href: "/appointments", label: "Appointments" },
   { href: "/contact", label: "Contact" },
 ]

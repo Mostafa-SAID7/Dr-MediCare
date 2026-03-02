@@ -7,6 +7,8 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Mail, Lock, User, Phone } from 'lucide-react'
+import { toast } from 'sonner'
+import { Checkbox } from '@/components/ui/checkbox'
 
 interface AuthModalProps {
   open: boolean
@@ -23,6 +25,10 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
     setTimeout(() => {
       setIsLoading(false)
       onOpenChange(false)
+      toast.success('Welcome back!', {
+        description: 'You have successfully signed in to your account.',
+        duration: 4000,
+      })
       // In a real app, handle authentication here
     }, 1500)
   }
@@ -34,6 +40,10 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
     setTimeout(() => {
       setIsLoading(false)
       onOpenChange(false)
+      toast.success('Account Created!', {
+        description: 'Welcome to MediCare! Your account has been successfully created.',
+        duration: 4000,
+      })
       // In a real app, handle registration here
     }, 1500)
   }
@@ -85,10 +95,15 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
               </div>
               
               <div className="flex items-center justify-between text-sm">
-                <label className="flex items-center space-x-2 cursor-pointer">
-                  <input type="checkbox" className="rounded border-border" />
-                  <span className="text-muted-foreground">Remember me</span>
-                </label>
+                <div className="flex items-center space-x-2">
+                  <Checkbox id="remember" />
+                  <label 
+                    htmlFor="remember" 
+                    className="text-sm text-muted-foreground cursor-pointer"
+                  >
+                    Remember me
+                  </label>
+                </div>
                 <a href="#" className="text-primary hover:underline">
                   Forgot password?
                 </a>
@@ -186,8 +201,11 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
               </div>
               
               <div className="flex items-start space-x-2">
-                <input type="checkbox" className="rounded border-border mt-1" required />
-                <label className="text-sm text-muted-foreground">
+                <Checkbox id="terms" required />
+                <label 
+                  htmlFor="terms" 
+                  className="text-sm text-muted-foreground cursor-pointer leading-relaxed"
+                >
                   I agree to the{' '}
                   <a href="#" className="text-primary hover:underline">Terms of Service</a>
                   {' '}and{' '}

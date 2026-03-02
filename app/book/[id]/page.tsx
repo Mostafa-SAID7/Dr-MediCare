@@ -10,12 +10,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
+import { DatePicker } from "@/components/ui/date-picker"
 import Link from "next/link"
 import { useParams, useRouter } from "next/navigation"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
-import { getDoctorById, timeSlots, getAvailableDates, appointmentTypes, paymentMethods } from "@/data"
-import { formatCurrency } from "@/lib/utils"
+import { getDoctorById, timeSlots, getAvailableDates } from "@/data"
+import { toast } from 'sonner'
 
 export default function BookAppointmentPage() {
   const params = useParams()
@@ -32,7 +33,7 @@ export default function BookAppointmentPage() {
     lastName: "",
     email: "",
     phone: "",
-    dateOfBirth: "",
+    dateOfBirth: undefined as Date | undefined,
     reason: "",
     symptoms: "",
     insurance: ""
@@ -64,6 +65,12 @@ export default function BookAppointmentPage() {
     
     setIsSubmitting(false)
     setBookingComplete(true)
+    
+    // Show success toast
+    toast.success('Appointment Confirmed!', {
+      description: `Your appointment with ${doctor.name} has been scheduled for ${selectedDate} at ${selectedTime}.`,
+      duration: 5000,
+    })
   }
 
   if (bookingComplete) {
@@ -278,12 +285,11 @@ export default function BookAppointmentPage() {
                   </div>
                   <div>
                     <Label htmlFor="dateOfBirth">Date of Birth *</Label>
-                    <Input
+                    <DatePicker
                       id="dateOfBirth"
-                      type="date"
-                      value={patientInfo.dateOfBirth}
-                      onChange={(e) => setPatientInfo({...patientInfo, dateOfBirth: e.target.value})}
-                      required
+                      date={patientInfo.dateOfBirth}
+                      onDateChange={(date) => setPatientInfo({...patientInfo, dateOfBirth: date})}
+                      placeholder="Select your date of birth"
                     />
                   </div>
                   <div>

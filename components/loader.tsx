@@ -31,8 +31,6 @@ export function Loader() {
           <div className="absolute -top-2 -right-2 w-8 h-8 bg-destructive rounded-full flex items-center justify-center animate-ping">
             <Activity className="w-4 h-4 text-white" />
           </div>
-          {/* Rotating ring */}
-          <div className="absolute inset-0 border-4 border-primary/20 rounded-2xl animate-spin" style={{ animationDuration: '3s' }}></div>
         </div>
 
         {/* Brand Name */}

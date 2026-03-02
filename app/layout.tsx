@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Exo, Source_Serif_4, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
+import { Toaster } from 'sonner'
 
 const fontSans = Exo({ 
   subsets: ['latin'],
@@ -125,6 +126,18 @@ html {
           disableTransitionOnChange
         >
           {children}
+          <Toaster 
+            position="top-right"
+            toastOptions={{
+              style: {
+                background: 'hsl(var(--card))',
+                color: 'hsl(var(--card-foreground))',
+                border: '1px solid hsl(var(--border))',
+              },
+              className: 'sonner-toast',
+            }}
+            richColors
+          />
         </ThemeProvider>
       </body>
     </html>

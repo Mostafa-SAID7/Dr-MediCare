@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { DatePicker } from "@/components/ui/date-picker"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
@@ -21,6 +22,14 @@ export default function PatientPortalPage() {
 
   const handleProfileChange = (field: string, value: string) => {
     setProfileData(prev => ({ ...prev, [field]: value }))
+  }
+  
+  const handleDateChange = (date: Date | undefined) => {
+    if (date) {
+      // Convert Date to YYYY-MM-DD string format
+      const dateString = date.toISOString().split('T')[0]
+      setProfileData(prev => ({ ...prev, dateOfBirth: dateString }))
+    }
   }
 
   const handleSaveProfile = () => {
@@ -143,13 +152,24 @@ export default function PatientPortalPage() {
                   </div>
                   <div>
                     <Label htmlFor="dob">Date of Birth</Label>
-                    <Input
-                      id="dob"
-                      type="date"
-                      value={profileData.dateOfBirth}
-                      onChange={(e) => handleProfileChange('dateOfBirth', e.target.value)}
-                      disabled={!isEditingProfile}
-                    />
+                    {isEditingProfile ? (
+                      <DatePicker
+                        id="dob"
+                        date={profileData.dateOfBirth ? new Date(profileData.dateOfBirth) : undefined}
+                        onDateChange={handleDateChange}
+                        placeholder="Select your date of birth"
+                      />
+                    ) : (
+                      <Input
+                        id="dob"
+                        value={new Date(profileData.dateOfBirth).toLocaleDateString('en-US', { 
+                          year: 'numeric', 
+                          month: 'long', 
+                          day: 'numeric' 
+                        })}
+                        disabled
+                      />
+                    )}
                   </div>
                   <div>
                     <Label htmlFor="address">Address</Label>

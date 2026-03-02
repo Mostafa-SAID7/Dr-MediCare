@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { Calendar, Clock, Phone, Shield, Award, Heart } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Loader } from "@/components/loader"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { PageHeader } from "@/components/page-header"
@@ -14,18 +13,12 @@ import { SectionContainer } from "@/components/section-container"
 import { TypingText } from "@/components/typing-text"
 import { EmergencyModal } from "@/components/emergency-modal"
 import { doctors, specialties } from "@/data"
-import { useLoading } from "@/hooks"
 
 export default function HomePage() {
-  const isLoading = useLoading(500)
   const [emergencyModalOpen, setEmergencyModalOpen] = useState(false)
 
-  if (isLoading) {
-    return <Loader />
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-secondary to-background">
+    <div className="min-h-screen bg-grid-dots">
       <Header currentPath="/" />
 
       {/* Hero Section */}
@@ -33,7 +26,7 @@ export default function HomePage() {
         {/* Animated Background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {/* Gradient Orbs */}
-          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-float" />
+          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-float-hero" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-float-delayed" />
           <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-secondary/20 rounded-full blur-3xl animate-pulse-slow" />
           
@@ -51,7 +44,7 @@ export default function HomePage() {
           <div className="absolute bottom-1/3 left-1/4 opacity-10 animate-float-delayed">
             <Shield className="w-12 h-12 text-accent" />
           </div>
-          <div className="absolute top-1/2 right-1/3 opacity-10 animate-float">
+          <div className="absolute top-1/2 right-1/3 opacity-10 animate-float-hero">
             <Award className="w-14 h-14 text-secondary-foreground" />
           </div>
         </div>
@@ -185,25 +178,25 @@ export default function HomePage() {
         />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="text-center space-y-4">
-              <div className="w-16 h-16 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-full flex items-center justify-center mx-auto">
+              <div className="w-16 h-16 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full flex items-center justify-center mx-auto">
                 <Clock className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-800">24/7 Availability</h3>
-              <p className="text-gray-600">Round-the-clock medical support and emergency services</p>
+              <h3 className="text-xl font-semibold text-foreground">24/7 Availability</h3>
+              <p className="text-muted-foreground">Round-the-clock medical support and emergency services</p>
             </div>
             <div className="text-center space-y-4">
-              <div className="w-16 h-16 bg-gradient-to-r from-accent/10 to-primary/10 rounded-full flex items-center justify-center mx-auto">
-                <Shield className="w-8 h-8 text-accent" />
+              <div className="w-16 h-16 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full flex items-center justify-center mx-auto">
+                <Shield className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-800">Secure & Private</h3>
-              <p className="text-gray-600">Your medical data is protected with enterprise-grade security</p>
+              <h3 className="text-xl font-semibold text-foreground">Secure & Private</h3>
+              <p className="text-muted-foreground">Your medical data is protected with enterprise-grade security</p>
             </div>
             <div className="text-center space-y-4">
-              <div className="w-16 h-16 bg-gradient-to-r from-secondary-foreground/10 to-accent/10 rounded-full flex items-center justify-center mx-auto">
-                <Award className="w-8 h-8 text-secondary-foreground" />
+              <div className="w-16 h-16 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full flex items-center justify-center mx-auto">
+                <Award className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-800">Expert Care</h3>
-              <p className="text-gray-600">Board-certified doctors with years of experience</p>
+              <h3 className="text-xl font-semibold text-foreground">Expert Care</h3>
+              <p className="text-muted-foreground">Board-certified doctors with years of experience</p>
             </div>
           </div>
       </SectionContainer>
@@ -218,11 +211,14 @@ export default function HomePage() {
             Join thousands of patients who trust MediCare for their healthcare needs
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="text-primary">
+            <Button 
+              size="lg" 
+              className="!bg-white !text-black hover:!bg-white/90 hover:!text-black shadow-lg !border-white"
+            >
               <Calendar className="w-5 h-5 mr-2" />
               Book Your First Appointment
             </Button>
-            <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+            <Button size="lg" variant="outline" className="!bg-transparent border-white text-white hover:!bg-white hover:!text-primary">
               <Phone className="w-5 h-5 mr-2" />
               Call Now: (555) 123-4567
             </Button>
