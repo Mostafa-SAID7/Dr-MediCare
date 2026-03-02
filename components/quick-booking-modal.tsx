@@ -26,12 +26,12 @@ export function QuickBookingModal({ open, onOpenChange }: QuickBookingModalProps
   const [isSuccess, setIsSuccess] = useState(false)
 
   const specialties = [
-    'Cardiology',
-    'Neurology',
-    'Pediatrics',
-    'Orthopedics',
-    'Dermatology',
-    'General Practice'
+    'Cardiologist',
+    'Neurologist',
+    'Pediatrician',
+    'Orthopedic Surgeon',
+    'Dermatologist',
+    'General Practitioner'
   ]
 
   const filteredDoctors = selectedSpecialty
