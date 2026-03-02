@@ -1,17 +1,16 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Calendar, Clock, User, Phone, Mail, MapPin, Star, ChevronRight, Heart, Shield, Award, Menu } from 'lucide-react'
+import { Calendar, Clock, Phone, Shield, Award, Heart } from 'lucide-react'
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { Card, CardContent } from "@/components/ui/card"
 import Link from "next/link"
 import { Loader } from "@/components/loader"
-import { MobileMenu } from "@/components/mobile-menu"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-
-import { slugify } from "@/lib/utils"
+import { PageHeader } from "@/components/page-header"
+import { DoctorCard } from "@/components/doctor-card"
+import { SectionContainer } from "@/components/section-container"
 
 const doctors = [
   {
@@ -50,7 +49,7 @@ const specialties = [
   { name: "Cardiology", icon: Heart, count: "12 doctors" },
   { name: "Neurology", icon: Shield, count: "8 doctors" },
   { name: "Pediatrics", icon: Award, count: "15 doctors" },
-  { name: "Orthopedics", icon: User, count: "10 doctors" },
+  { name: "Orthopedics", icon: Heart, count: "10 doctors" },
 ]
 
 export default function HomePage() {
@@ -68,46 +67,9 @@ export default function HomePage() {
     return <Loader />
   }
 
-  const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/doctors", label: "Doctors" },
-    { href: "/appointments", label: "Appointments" },
-    { href: "/contact", label: "Contact" },
-    { href: "/patient-portal", label: "Patient Portal" },
-  ]
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-secondary to-background">
-      {/* Header */}
-      <header className="bg-gradient-to-r from-primary to-accent shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
-                <Heart className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold text-white">MediCare</span>
-            </div>
-            <nav className="hidden md:flex space-x-8">
-              {navLinks.map((link) => (
-                <Link key={link.href} href={link.href} className={`text-white/90 hover:text-white transition-colors font-medium ${link.href === '/' ? 'font-bold' : ''}`}>
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-            <div className="flex items-center space-x-4">
-              <ThemeToggle />
-              <Button variant="outline" className="hidden sm:inline-flex bg-foreground text-background hover:bg-foreground/90">
-                Sign In
-              </Button>
-              <Button className="bg-foreground text-background hover:bg-foreground/90">
-                Book Now
-              </Button>
-              <MobileMenu links={navLinks} />
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header currentPath="/" />
 
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-secondary to-background">
@@ -165,17 +127,13 @@ export default function HomePage() {
       </section>
 
       {/* Specialties Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-card">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-              Medical Specialties
-            </h2>
-            <p className="text-xl text-gray-600">
-              Find the right specialist for your healthcare needs
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <SectionContainer background="card">
+        <PageHeader 
+          title="Medical Specialties"
+          description="Find the right specialist for your healthcare needs"
+          centered
+        />
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {specialties.map((specialty, index) => (
               <Card key={index} className="group hover:shadow-lg transition-all duration-300 cursor-pointer border-2 hover:border-primary rounded-lg shadow-sm transition-all duration-300 hover:shadow-md">
                 <CardContent className="p-6 text-center">
@@ -188,87 +146,29 @@ export default function HomePage() {
               </Card>
             ))}
           </div>
-        </div>
-      </section>
+      </SectionContainer>
 
       {/* Featured Doctors */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-muted">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-              Featured Doctors
-            </h2>
-            <p className="text-xl text-gray-600">
-              Meet our top-rated healthcare professionals
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {doctors.map((doctor) => {
-              const slug = slugify(doctor.name)
-              
-              return (
-              <Card key={doctor.id} className="group hover:shadow-xl transition-all duration-300 overflow-hidden rounded-lg shadow-sm transition-all duration-300 hover:shadow-md cursor-pointer">
-                <Link href={`/doctors/${slug}`} className="block">
-                <div className="relative">
-                  <img
-                    src={doctor.image}
-                    alt={doctor.name}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <Badge className="absolute top-4 right-4 bg-primary">
-                    Available
-                  </Badge>
-                </div>
-                </Link>
-                <CardContent className="p-6">
-                  <div className="space-y-4">
-                    <Link href={`/doctors/${slug}`} className="block hover:opacity-80 transition-opacity">
-                      <h3 className="text-xl font-semibold text-gray-800">{doctor.name}</h3>
-                      <p className="text-primary font-medium">{doctor.specialty}</p>
-                    </Link>
-                    <div className="flex items-center justify-between text-sm text-gray-600">
-                      <div className="flex items-center">
-                        <Star className="w-4 h-4 text-yellow-400 fill-current mr-1" />
-                        <span>{doctor.rating}</span>
-                      </div>
-                      <span>{doctor.experience}</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm text-gray-600">Next available</p>
-                        <p className="font-medium text-gray-800">{doctor.nextAvailable}</p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-sm text-gray-600">Consultation</p>
-                        <p className="font-bold text-accent">{doctor.consultationFee}</p>
-                      </div>
-                    </div>
-                    <Link href={`/book/${doctor.id}`}>
-                      <Button className="w-full">
-                        <Calendar className="w-4 h-4 mr-2" />
-                        Book Appointment
-                      </Button>
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-              )
-            })}
-          </div>
+      <SectionContainer background="muted">
+        <PageHeader 
+          title="Featured Doctors"
+          description="Meet our top-rated healthcare professionals"
+          centered
+        />
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {doctors.map((doctor) => (
+            <DoctorCard key={doctor.id} doctor={doctor} />
+          ))}
         </div>
-      </section>
+      </SectionContainer>
 
       {/* Features Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-card">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-              Why Choose MediCare?
-            </h2>
-            <p className="text-xl text-gray-600">
-              Experience healthcare like never before
-            </p>
-          </div>
+      <SectionContainer background="card">
+        <PageHeader 
+          title="Why Choose MediCare?"
+          description="Experience healthcare like never before"
+          centered
+        />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="text-center space-y-4">
               <div className="w-16 h-16 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-full flex items-center justify-center mx-auto">
@@ -292,8 +192,7 @@ export default function HomePage() {
               <p className="text-gray-600">Board-certified doctors with years of experience</p>
             </div>
           </div>
-        </div>
-      </section>
+      </SectionContainer>
 
       {/* CTA Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-primary to-accent">
