@@ -157,7 +157,7 @@ export default function DoctorsPage() {
             </nav>
             <div className="flex items-center space-x-4">
               <ThemeToggle />
-              <Button className="bg-destructive hover:bg-destructive/90 text-white">
+              <Button variant="destructive">
                 Emergency
               </Button>
               <MobileMenu links={navLinks} />
@@ -293,7 +293,7 @@ export default function DoctorsPage() {
                       <p className="font-bold text-accent text-lg">{doctor.consultationFee}</p>
                     </div>
                     <Link href={`/book/${doctor.id}`}>
-                      <Button className="bg-accent hover:bg-accent/90">
+                      <Button>
                         <Calendar className="w-4 h-4 mr-2" />
                         Book Now
                       </Button>
@@ -328,7 +328,7 @@ export default function DoctorsPage() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-foreground text-white py-12 px-4 sm:px-6 lg:px-8 mt-16">
+      <footer className="bg-gradient-to-r from-primary to-accent text-white py-12 px-4 sm:px-6 lg:px-8 mt-16">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="space-y-4">
@@ -374,11 +374,27 @@ export default function DoctorsPage() {
               <p className="text-2xl font-bold text-destructive">(555) 911-HELP</p>
             </div>
           </div>
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 MediCare. All rights reserved.</p>
-          </div>
         </div>
       </footer>
+      
+      {/* Copyright Section */}
+      <div className="bg-black text-white py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="border-t border-gray-800 w-full mb-6"></div>
+          <p className="text-center text-gray-400">
+            &copy; 2024 - {new Date().getFullYear()}{' '}
+            <a 
+              href="https://m-said-portfolio.netlify.app" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-white hover:text-primary transition-colors font-semibold"
+            >
+              M.Said
+            </a>
+            . All rights reserved.
+          </p>
+        </div>
+      </div>
     </div>
   )
 }

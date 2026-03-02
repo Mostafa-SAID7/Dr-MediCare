@@ -60,7 +60,7 @@ export default function ContactPage() {
               Thank you for contacting us. We'll get back to you within 24 hours.
             </p>
             <div className="space-y-3">
-              <Button className="w-full bg-primary hover:bg-primary/90" onClick={() => setSubmitted(false)}>
+              <Button className="w-full" onClick={() => setSubmitted(false)}>
                 Send Another Message
               </Button>
               <Link href="/">
@@ -95,7 +95,7 @@ export default function ContactPage() {
               ))}
             </nav>
             <div className="flex items-center space-x-4">
-              <Button className="bg-destructive hover:bg-destructive/90">
+              <Button variant="destructive">
                 <Phone className="w-4 h-4 mr-2" />
                 Emergency
               </Button>
@@ -132,7 +132,7 @@ export default function ContactPage() {
                   For medical emergencies, call immediately:
                 </p>
                 <div className="space-y-2">
-                  <Button className="w-full bg-destructive hover:bg-destructive/90" size="lg">
+                  <Button variant="destructive" className="w-full" size="lg">
                     <Phone className="w-4 h-4 mr-2" />
                     (555) 911-HELP
                   </Button>
@@ -380,7 +380,7 @@ export default function ContactPage() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-foreground text-white py-12 px-4 sm:px-6 lg:px-8 mt-16">
+      <footer className="bg-gradient-to-r from-primary to-accent text-white py-12 px-4 sm:px-6 lg:px-8 mt-16">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="space-y-4">
@@ -426,11 +426,27 @@ export default function ContactPage() {
               <p className="text-2xl font-bold text-destructive">(555) 911-HELP</p>
             </div>
           </div>
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 MediCare. All rights reserved.</p>
-          </div>
         </div>
       </footer>
+      
+      {/* Copyright Section */}
+      <div className="bg-black text-white py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="border-t border-gray-800 w-full mb-6"></div>
+          <p className="text-center text-gray-400">
+            &copy; 2024 - {new Date().getFullYear()}{' '}
+            <a 
+              href="https://m-said-portfolio.netlify.app" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-white hover:text-primary transition-colors font-semibold"
+            >
+              M.Said
+            </a>
+            . All rights reserved.
+          </p>
+        </div>
+      </div>
     </div>
   )
 }

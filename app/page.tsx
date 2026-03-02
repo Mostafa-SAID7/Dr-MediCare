@@ -123,11 +123,11 @@ export default function HomePage() {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white text-lg px-8 py-3">
+                <Button size="lg" className="text-lg px-8 py-3">
                   <Calendar className="w-5 h-5 mr-2" />
                   Book Appointment
                 </Button>
-                <Button size="lg" variant="outline" className="text-lg px-8 py-3 border-2 border-destructive text-destructive hover:bg-destructive hover:text-white">
+                <Button size="lg" variant="destructive" className="text-lg px-8 py-3">
                   <Phone className="w-5 h-5 mr-2" />
                   Emergency Call
                 </Button>
@@ -249,7 +249,7 @@ export default function HomePage() {
                       </div>
                     </div>
                     <Link href={`/book/${doctor.id}`}>
-                      <Button className="w-full bg-primary hover:bg-primary/90 text-white">
+                      <Button className="w-full">
                         <Calendar className="w-4 h-4 mr-2" />
                         Book Appointment
                       </Button>
@@ -310,7 +310,7 @@ export default function HomePage() {
             Join thousands of patients who trust MediCare for their healthcare needs
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-primary-foreground text-primary hover:bg-primary-foreground/90">
+            <Button size="lg" variant="secondary" className="text-primary">
               <Calendar className="w-5 h-5 mr-2" />
               Book Your First Appointment
             </Button>
@@ -323,7 +323,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-foreground text-white py-12 px-4 sm:px-6 lg:px-8">
+      <footer className="bg-gradient-to-r from-primary to-accent text-white py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="space-y-4">
@@ -369,11 +369,27 @@ export default function HomePage() {
               <p className="text-2xl font-bold text-destructive">(555) 911-HELP</p>
             </div>
           </div>
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 MediCare. All rights reserved.</p>
-          </div>
         </div>
       </footer>
+      
+      {/* Copyright Section */}
+      <div className="bg-black text-white py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="border-t border-gray-800 w-full mb-6"></div>
+          <p className="text-center text-gray-400">
+            &copy; 2024 - {new Date().getFullYear()}{' '}
+            <a 
+              href="https://m-said-portfolio.netlify.app" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-white hover:text-primary transition-colors font-semibold"
+            >
+              M.Said
+            </a>
+            . All rights reserved.
+          </p>
+        </div>
+      </div>
     </div>
   )
 }
