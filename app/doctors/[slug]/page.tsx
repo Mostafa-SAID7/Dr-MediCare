@@ -10,7 +10,6 @@ import { useParams, useRouter } from 'next/navigation'
 import { MobileMenu } from '@/components/mobile-menu'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Footer } from '@/components/footer'
-import { Footer } from '@/components/footer'
 
 const doctorsData = {
   'sarah-johnson': {
