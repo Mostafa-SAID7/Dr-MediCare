@@ -1,14 +1,16 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import { Heart } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { MobileMenu } from '@/components/mobile-menu'
 import { ThemeToggle } from '@/components/theme-toggle'
-import { AuthModal } from '@/components/auth-modal'
-import { QuickBookingModal } from '@/components/quick-booking-modal'
 import { ReactNode } from 'react'
+
+// Lazy load modals
+const AuthModal = lazy(() => import('@/components/auth-modal').then(mod => ({ default: mod.AuthModal })))
+const QuickBookingModal = lazy(() => import('@/components/quick-booking-modal').then(mod => ({ default: mod.QuickBookingModal })))
 
 interface HeaderProps {
   currentPath?: string
@@ -80,8 +82,10 @@ export function Header({ currentPath = '/', rightContent }: HeaderProps) {
         </div>
       </header>
 
-      <AuthModal open={authModalOpen} onOpenChange={setAuthModalOpen} />
-      <QuickBookingModal open={bookingModalOpen} onOpenChange={setBookingModalOpen} />
+      <Suspense fallback={null}>
+        <AuthModal open={authModalOpen} onOpenChange={setAuthModalOpen} />
+        <QuickBookingModal open={bookingModalOpen} onOpenChange={setBookingModalOpen} />
+      </Suspense>
     </>
   )
 }

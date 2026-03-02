@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Calendar, Clock, Phone, Shield, Award, Heart } from 'lucide-react'
@@ -12,8 +12,10 @@ import { PageHeader } from "@/components/page-header"
 import { DoctorCard } from "@/components/doctor-card"
 import { SectionContainer } from "@/components/section-container"
 import { TypingText } from "@/components/typing-text"
-import { EmergencyModal } from "@/components/emergency-modal"
 import { doctors, specialties } from "@/data"
+
+// Lazy load heavy modals
+const EmergencyModal = lazy(() => import("@/components/emergency-modal").then(mod => ({ default: mod.EmergencyModal })))
 
 export default function HomePage() {
   const [emergencyModalOpen, setEmergencyModalOpen] = useState(false)
@@ -232,7 +234,9 @@ export default function HomePage() {
 
       <Footer />
       
-      <EmergencyModal open={emergencyModalOpen} onOpenChange={setEmergencyModalOpen} />
+      <Suspense fallback={null}>
+        <EmergencyModal open={emergencyModalOpen} onOpenChange={setEmergencyModalOpen} />
+      </Suspense>
     </div>
   )
 }
