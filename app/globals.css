@@ -410,6 +410,57 @@
   color: hsl(var(--card-foreground)) !important;
 }
 
+/* Calendar Dropdown Styling */
+.rdp-dropdown_root {
+  position: relative;
+  display: inline-flex;
+}
+
+.rdp-dropdown {
+  appearance: none;
+  background: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.375rem;
+  color: hsl(var(--foreground));
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.375rem 1.75rem 0.375rem 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.rdp-dropdown:hover {
+  background: hsl(var(--accent));
+  border-color: hsl(var(--primary));
+}
+
+.rdp-dropdown:focus {
+  outline: none;
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2);
+}
+
+.rdp-dropdown_root::after {
+  content: "";
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid hsl(var(--foreground));
+  pointer-events: none;
+}
+
+.rdp-dropdowns {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
 [data-sonner-toast][data-type="success"] {
   background: hsl(var(--primary) / 0.1) !important;
   border-color: hsl(var(--primary)) !important;

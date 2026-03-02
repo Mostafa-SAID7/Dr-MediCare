@@ -30,6 +30,8 @@ export function DatePicker({
   className,
   id,
 }: DatePickerProps) {
+  const currentYear = new Date().getFullYear()
+  
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -52,9 +54,10 @@ export function DatePicker({
           mode="single"
           selected={date}
           onSelect={onDateChange}
-          captionLayout="dropdown-months"
+          captionLayout="dropdown"
           fromYear={1900}
-          toYear={2030}
+          toYear={currentYear + 10}
+          defaultMonth={date}
         />
       </PopoverContent>
     </Popover>
