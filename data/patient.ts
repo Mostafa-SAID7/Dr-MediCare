@@ -10,7 +10,7 @@ export const samplePatient: Patient = {
   address: "123 Health St, Medical City",
   insuranceProvider: "MediCare Insurance",
   medicalHistory: "No significant medical history. Allergies: Penicillin.",
-  profileImage: "/placeholder-user.png"
+  profileImage: "/placeholder-user.jpg"
 }
 
 // Export as patient for convenience
