@@ -21,49 +21,54 @@ export function Loader() {
   }, [])
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-blue-50 via-white to-green-50 flex items-center justify-center z-50">
-      <div className="text-center space-y-8">
+    <div className="fixed inset-0 bg-gradient-to-br from-secondary to-background flex items-center justify-center z-50">
+      <div className="text-center space-y-8 px-4">
         {/* Logo Animation */}
         <div className="relative">
-          <div className="w-20 h-20 bg-gradient-to-r from-blue-600 to-green-600 rounded-full flex items-center justify-center mx-auto animate-pulse">
-            <Heart className="w-10 h-10 text-white animate-bounce" />
+          <div className="w-24 h-24 bg-gradient-to-r from-primary to-accent rounded-2xl flex items-center justify-center mx-auto animate-pulse shadow-2xl">
+            <Heart className="w-12 h-12 text-white animate-[heartbeat_1.5s_ease-in-out_infinite]" />
           </div>
-          <div className="absolute -top-2 -right-2 w-6 h-6 bg-orange-500 rounded-full flex items-center justify-center animate-ping">
-            <Activity className="w-3 h-3 text-white" />
+          <div className="absolute -top-2 -right-2 w-8 h-8 bg-destructive rounded-full flex items-center justify-center animate-ping">
+            <Activity className="w-4 h-4 text-white" />
           </div>
+          {/* Rotating ring */}
+          <div className="absolute inset-0 border-4 border-primary/20 rounded-2xl animate-spin" style={{ animationDuration: '3s' }}></div>
         </div>
 
         {/* Brand Name */}
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold text-gray-800">
-            Medi<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-green-600">Care</span>
+          <h1 className="text-5xl font-bold text-foreground">
+            Medi<span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Care</span>
           </h1>
-          <p className="text-gray-600 text-lg">Loading your healthcare experience...</p>
+          <p className="text-muted-foreground text-lg font-medium">Loading your healthcare experience...</p>
         </div>
 
         {/* Progress Bar */}
         <div className="w-80 max-w-sm mx-auto">
-          <div className="bg-gray-200 rounded-full h-2 overflow-hidden">
+          <div className="bg-muted rounded-full h-3 overflow-hidden shadow-inner">
             <div 
-              className="h-full bg-gradient-to-r from-blue-600 to-green-600 rounded-full transition-all duration-300 ease-out"
+              className="h-full bg-gradient-to-r from-primary via-accent to-primary rounded-full transition-all duration-300 ease-out relative overflow-hidden"
               style={{ width: `${progress}%` }}
-            />
+            >
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-[shimmer_2s_infinite]"></div>
+            </div>
           </div>
-          <div className="flex justify-between text-sm text-gray-500 mt-2">
+          <div className="flex justify-between text-sm text-muted-foreground mt-3 font-medium">
             <span>Initializing...</span>
-            <span>{progress}%</span>
+            <span className="text-primary font-bold">{progress}%</span>
           </div>
         </div>
 
-        {/* Loading Animation */}
+        {/* Loading Animation Dots */}
         <div className="flex justify-center space-x-2">
-          <div className="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-          <div className="w-3 h-3 bg-green-600 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-          <div className="w-3 h-3 bg-orange-600 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+          <div className="w-3 h-3 bg-primary rounded-full animate-bounce shadow-lg" style={{ animationDelay: '0ms' }}></div>
+          <div className="w-3 h-3 bg-accent rounded-full animate-bounce shadow-lg" style={{ animationDelay: '150ms' }}></div>
+          <div className="w-3 h-3 bg-destructive rounded-full animate-bounce shadow-lg" style={{ animationDelay: '300ms' }}></div>
         </div>
 
         {/* Loading Messages */}
-        <div className="text-gray-600">
+        <div className="text-muted-foreground font-medium min-h-[24px] animate-pulse">
           {progress < 30 && "Connecting to healthcare network..."}
           {progress >= 30 && progress < 60 && "Loading doctor profiles..."}
           {progress >= 60 && progress < 90 && "Preparing appointment system..."}
