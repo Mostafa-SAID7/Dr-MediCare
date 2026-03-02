@@ -9,6 +9,7 @@ import { Footer } from "@/components/footer"
 import { PageHeader } from "@/components/page-header"
 import { DoctorCard } from "@/components/doctor-card"
 import { SectionContainer } from "@/components/section-container"
+import { TypingText } from "@/components/typing-text"
 import { doctors, specialties } from "@/data"
 import { useLoading } from "@/hooks"
 
@@ -30,10 +31,19 @@ export default function HomePage() {
             <div className="space-y-8">
               <div className="space-y-4">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-                  Your Health,{" "}
-                  <span className="text-primary">
-                    Our Priority
-                  </span>
+                  <TypingText 
+                    text="Your Health, " 
+                    speed={80}
+                    className="text-foreground"
+                  />
+                  <br />
+                  <TypingText 
+                    text="Our Priority" 
+                    speed={80}
+                    delay={1200}
+                    neon
+                    className="text-primary"
+                  />
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed">
                   Book appointments with top-rated doctors instantly. Quality healthcare made accessible and convenient.
