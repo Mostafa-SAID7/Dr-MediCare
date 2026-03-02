@@ -1,10 +1,8 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Calendar, Clock, Phone, Shield, Award, Heart } from 'lucide-react'
+import { Calendar, Clock, Phone, Shield, Award } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import Link from "next/link"
 import { Loader } from "@/components/loader"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -12,17 +10,10 @@ import { PageHeader } from "@/components/page-header"
 import { DoctorCard } from "@/components/doctor-card"
 import { SectionContainer } from "@/components/section-container"
 import { doctors, specialties } from "@/data"
+import { useLoading } from "@/hooks"
 
 export default function HomePage() {
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 500) // Reduced to 500ms for faster loading
-
-    return () => clearTimeout(timer)
-  }, [])
+  const isLoading = useLoading(500)
 
   if (isLoading) {
     return <Loader />

@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
+import { DoctorAvatar } from "@/components/doctor-avatar"
 import { patient, patientAppointments, statusColors } from "@/data"
 
 export default function PatientPortalPage() {
@@ -205,10 +206,11 @@ export default function PatientPortalPage() {
                   patientAppointments.filter(app => new Date(app.date) >= new Date() && app.status !== 'completed' && app.status !== 'cancelled').map((appointment) => (
                     <div key={appointment.id} className="flex items-center justify-between p-4 border rounded-lg bg-muted/30">
                       <div className="flex items-center space-x-4">
-                        <img
-                          src={`/simple-line-sketch.png?height=48&width=48&query=sketch of ${appointment.specialty.toLowerCase()} doctor`}
-                          alt={appointment.doctor}
-                          className="w-12 h-12 rounded-full object-cover"
+                        <DoctorAvatar 
+                          name={appointment.doctor}
+                          specialty={appointment.specialty}
+                          image={appointment.image}
+                          size="sm"
                         />
                         <div>
                           <h4 className="font-semibold text-foreground">{appointment.doctor}</h4>
@@ -251,10 +253,11 @@ export default function PatientPortalPage() {
                   patientAppointments.filter(app => new Date(app.date) < new Date() || app.status === 'completed' || app.status === 'cancelled').map((appointment) => (
                     <div key={appointment.id} className="flex items-center justify-between p-4 border rounded-lg bg-muted/30">
                       <div className="flex items-center space-x-4">
-                        <img
-                          src={`/simple-line-sketch.png?height=48&width=48&query=sketch of ${appointment.specialty.toLowerCase()} doctor`}
-                          alt={appointment.doctor}
-                          className="w-12 h-12 rounded-full object-cover"
+                        <DoctorAvatar 
+                          name={appointment.doctor}
+                          specialty={appointment.specialty}
+                          image={appointment.image}
+                          size="sm"
                         />
                         <div>
                           <h4 className="font-semibold text-foreground">{appointment.doctor}</h4>

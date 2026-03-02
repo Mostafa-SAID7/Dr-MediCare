@@ -13,6 +13,7 @@ import Link from "next/link"
 import { MobileMenu } from "@/components/mobile-menu"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
+import { DoctorAvatar } from "@/components/doctor-avatar"
 import { appointments, statusColors } from "@/data"
 
 export default function AppointmentsPage() {
@@ -188,10 +189,11 @@ export default function AppointmentsPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
-                    <img
-                      src={`/simple-line-sketch.png?height=64&width=64&query=sketch of ${appointment.specialty.toLowerCase()} doctor`}
-                      alt={appointment.doctor}
-                      className="w-16 h-16 rounded-full object-cover"
+                    <DoctorAvatar 
+                      name={appointment.doctor}
+                      specialty={appointment.specialty}
+                      image={appointment.image}
+                      size="md"
                     />
                     <div className="space-y-1">
                       <h3 className="text-lg font-semibold text-gray-800">
