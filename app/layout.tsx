@@ -8,26 +8,29 @@ import { Toaster } from 'sonner'
 const fontSans = Exo({ 
   subsets: ['latin'],
   variable: '--font-sans',
-  display: 'swap',
+  display: 'optional',
   preload: true,
   fallback: ['system-ui', 'arial'],
+  adjustFontFallback: true,
 })
 
 const fontSerif = Source_Serif_4({ 
   subsets: ['latin'],
   variable: '--font-serif',
-  display: 'swap',
+  display: 'optional',
   preload: false,
   fallback: ['georgia', 'serif'],
+  adjustFontFallback: true,
 })
 
 const fontMono = IBM_Plex_Mono({ 
   weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
   variable: '--font-mono',
-  display: 'swap',
+  display: 'optional',
   preload: false,
   fallback: ['monospace'],
+  adjustFontFallback: true,
 })
 
 export const metadata: Metadata = {

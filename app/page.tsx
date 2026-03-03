@@ -56,7 +56,7 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight min-h-[4.5rem] md:min-h-[5.5rem] lg:min-h-[7rem]">
                   <TypingText 
                     text="Your Health, Our Priority" 
                     speed={80}
@@ -85,7 +85,7 @@ export default function HomePage() {
                   Emergency Call
                 </Button>
               </div>
-              <div className="grid grid-cols-3 gap-8 pt-8">
+              <div className="grid grid-cols-3 gap-8 pt-8 min-h-[120px]">
                 <div className="text-center group">
                   <div className="text-3xl font-bold text-primary neon-stat border-2 border-primary/30 rounded-lg p-4 bg-primary/5 hover:border-primary/60 transition-all duration-300">
                     500+
@@ -123,7 +123,7 @@ export default function HomePage() {
               `}</style>
             </div>
             <div className="relative">
-              <div className="relative z-10">
+              <div className="relative z-10 aspect-[3/2]">
                 <Image
                   src="/modern-medical-consultation-sketch.png"
                   alt="Medical consultation"
@@ -132,7 +132,7 @@ export default function HomePage() {
                   priority
                   quality={85}
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 600px"
-                  className="rounded-2xl shadow-2xl"
+                  className="rounded-2xl shadow-2xl w-full h-full object-cover"
                 />
               </div>
               <div className="absolute -top-4 -right-4 w-full h-full bg-gradient-to-r from-primary to-accent rounded-2xl -z-10"></div>
