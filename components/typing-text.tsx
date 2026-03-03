@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, memo } from 'react'
 import { cn } from '@/lib/utils'
 
 interface TypingTextProps {
@@ -11,7 +11,7 @@ interface TypingTextProps {
   neon?: boolean
 }
 
-export function TypingText({ 
+export const TypingText = memo(function TypingText({ 
   text, 
   className, 
   speed = 100, 
@@ -93,4 +93,4 @@ export function TypingText({
       `}</style>
     </span>
   )
-}
+})

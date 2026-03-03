@@ -1,5 +1,6 @@
 "use client"
 
+import { memo } from 'react'
 import { Heart, Shield, Clock, Award, Stethoscope, Activity, Pill, Microscope, Ambulance, Users, Calendar, Phone } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -71,6 +72,32 @@ const whyChooseUs = [
   }
 ]
 
+// Memoized service card component
+const ServiceCard = memo(({ service, index }: { service: typeof services[0]; index: number }) => (
+  <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-primary">
+    <CardContent className="p-6">
+      <div className="w-16 h-16 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+        <service.icon className="w-8 h-8 text-primary" />
+      </div>
+      <h3 className="text-xl font-bold text-foreground mb-3">
+        {service.title}
+      </h3>
+      <p className="text-muted-foreground mb-4">
+        {service.description}
+      </p>
+      <ul className="space-y-2">
+        {service.features.map((feature, idx) => (
+          <li key={idx} className="flex items-center text-sm text-muted-foreground">
+            <div className="w-1.5 h-1.5 bg-primary rounded-full mr-2" />
+            {feature}
+          </li>
+        ))}
+      </ul>
+    </CardContent>
+  </Card>
+))
+ServiceCard.displayName = 'ServiceCard'
+
 export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-grid-dots">
@@ -107,27 +134,7 @@ export default function ServicesPage() {
         />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-primary">
-              <CardContent className="p-6">
-                <div className="w-16 h-16 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <service.icon className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold text-foreground mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground mb-4">
-                  {service.description}
-                </p>
-                <ul className="space-y-2">
-                  {service.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center text-sm text-muted-foreground">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full mr-2" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+            <ServiceCard key={index} service={service} index={index} />
           ))}
         </div>
       </SectionContainer>

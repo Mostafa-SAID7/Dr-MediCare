@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useCallback, useMemo } from "react"
 import Image from "next/image"
 import { Calendar, Clock, User, CreditCard, ArrowLeft, Check } from 'lucide-react'
 import { Button } from "@/components/ui/button"
@@ -22,9 +22,9 @@ import { toast } from 'sonner'
 export default function BookAppointmentPage() {
   const params = useParams()
   const router = useRouter()
-  const doctorId = parseInt(params.id as string)
-  const doctor = getDoctorById(doctorId)
-  const dates = getAvailableDates()
+  const doctorId = useMemo(() => parseInt(params.id as string), [params.id])
+  const doctor = useMemo(() => getDoctorById(doctorId), [doctorId])
+  const dates = useMemo(() => getAvailableDates(), [])
 
   const [selectedDate, setSelectedDate] = useState("")
   const [selectedTime, setSelectedTime] = useState("")
@@ -44,21 +44,16 @@ export default function BookAppointmentPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [bookingComplete, setBookingComplete] = useState(false)
 
-  if (!doctor) {
-    return (
-      <div className="min-h-screen bg-grid-dots flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">Doctor not found</h1>
-          <Link href="/doctors">
-            <Button>Back to Doctors</Button>
-          </Link>
-        </div>
-      </div>
-    )
-  }
+  // Memoized handler for patient info updates
+  const updatePatientInfo = useCallback((field: string, value: string | Date | undefined) => {
+    setPatientInfo(prev => ({ ...prev, [field]: value }))
+  }, [])
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    if (!doctor) return
+    
     setIsSubmitting(true)
     
     // Simulate API call
@@ -72,6 +67,19 @@ export default function BookAppointmentPage() {
       description: `Your appointment with ${doctor.name} has been scheduled for ${selectedDate} at ${selectedTime}.`,
       duration: 5000,
     })
+  }, [doctor, selectedDate, selectedTime])
+
+  if (!doctor) {
+    return (
+      <div className="min-h-screen bg-grid-dots flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-800 mb-4">Doctor not found</h1>
+          <Link href="/doctors">
+            <Button>Back to Doctors</Button>
+          </Link>
+        </div>
+      </div>
+    )
   }
 
   if (bookingComplete) {
@@ -250,7 +258,7 @@ export default function BookAppointmentPage() {
                       <Input
                         id="firstName"
                         value={patientInfo.firstName}
-                        onChange={(e) => setPatientInfo({...patientInfo, firstName: e.target.value})}
+                        onChange={(e) => updatePatientInfo('firstName', e.target.value)}
                         required
                       />
                     </div>
@@ -259,7 +267,7 @@ export default function BookAppointmentPage() {
                       <Input
                         id="lastName"
                         value={patientInfo.lastName}
-                        onChange={(e) => setPatientInfo({...patientInfo, lastName: e.target.value})}
+                        onChange={(e) => updatePatientInfo('lastName', e.target.value)}
                         required
                       />
                     </div>
@@ -271,7 +279,7 @@ export default function BookAppointmentPage() {
                         id="email"
                         type="email"
                         value={patientInfo.email}
-                        onChange={(e) => setPatientInfo({...patientInfo, email: e.target.value})}
+                        onChange={(e) => updatePatientInfo('email', e.target.value)}
                         required
                       />
                     </div>
@@ -281,7 +289,7 @@ export default function BookAppointmentPage() {
                         id="phone"
                         type="tel"
                         value={patientInfo.phone}
-                        onChange={(e) => setPatientInfo({...patientInfo, phone: e.target.value})}
+                        onChange={(e) => updatePatientInfo('phone', e.target.value)}
                         required
                       />
                     </div>
@@ -291,7 +299,7 @@ export default function BookAppointmentPage() {
                     <DatePicker
                       id="dateOfBirth"
                       date={patientInfo.dateOfBirth}
-                      onDateChange={(date) => setPatientInfo({...patientInfo, dateOfBirth: date})}
+                      onDateChange={(date) => updatePatientInfo('dateOfBirth', date)}
                       placeholder="Select your date of birth"
                     />
                   </div>
@@ -301,7 +309,7 @@ export default function BookAppointmentPage() {
                       id="reason"
                       placeholder="Please describe the reason for your appointment..."
                       value={patientInfo.reason}
-                      onChange={(e) => setPatientInfo({...patientInfo, reason: e.target.value})}
+                      onChange={(e) => updatePatientInfo('reason', e.target.value)}
                       required
                     />
                   </div>
@@ -311,7 +319,7 @@ export default function BookAppointmentPage() {
                       id="symptoms"
                       placeholder="Describe any current symptoms..."
                       value={patientInfo.symptoms}
-                      onChange={(e) => setPatientInfo({...patientInfo, symptoms: e.target.value})}
+                      onChange={(e) => updatePatientInfo('symptoms', e.target.value)}
                     />
                   </div>
                   <div>
@@ -320,7 +328,7 @@ export default function BookAppointmentPage() {
                       id="insurance"
                       placeholder="e.g., Blue Cross Blue Shield"
                       value={patientInfo.insurance}
-                      onChange={(e) => setPatientInfo({...patientInfo, insurance: e.target.value})}
+                      onChange={(e) => updatePatientInfo('insurance', e.target.value)}
                     />
                   </div>
                 </CardContent>

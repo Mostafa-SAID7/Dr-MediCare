@@ -2,9 +2,20 @@
 
 import { Heart, Phone, Mail, MapPin } from 'lucide-react'
 import Link from 'next/link'
+import { memo, useMemo } from 'react'
 
-export function Footer() {
-  const currentYear = new Date().getFullYear()
+// Memoized link component
+const FooterLink = memo(({ href, children }: { href: string; children: React.ReactNode }) => (
+  <li>
+    <Link href={href} className="hover:text-white transition-colors">
+      {children}
+    </Link>
+  </li>
+))
+FooterLink.displayName = 'FooterLink'
+
+export const Footer = memo(function Footer() {
+  const currentYear = useMemo(() => new Date().getFullYear(), [])
 
   return (
     <>
@@ -29,11 +40,11 @@ export function Footer() {
             <div className="lg:pl-8 lg:border-l border-white/20">
               <h3 className="font-bold text-white mb-4">Quick Links</h3>
               <ul className="space-y-2 text-white/80">
-                <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-                <li><Link href="/doctors" className="hover:text-white transition-colors">Find Doctors</Link></li>
-                <li><Link href="/appointments" className="hover:text-white transition-colors">Book Appointment</Link></li>
-                <li><Link href="/services" className="hover:text-white transition-colors">Services</Link></li>
-                <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+                <FooterLink href="/">Home</FooterLink>
+                <FooterLink href="/doctors">Find Doctors</FooterLink>
+                <FooterLink href="/appointments">Book Appointment</FooterLink>
+                <FooterLink href="/services">Services</FooterLink>
+                <FooterLink href="/about">About Us</FooterLink>
               </ul>
             </div>
 
@@ -41,10 +52,10 @@ export function Footer() {
             <div className="lg:pl-8 lg:border-l border-white/20">
               <h3 className="font-bold text-white mb-4">Support</h3>
               <ul className="space-y-2 text-white/80">
-                <li><Link href="/faq" className="hover:text-white transition-colors">FAQ</Link></li>
-                <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
-                <li><Link href="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link></li>
-                <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+                <FooterLink href="/faq">FAQ</FooterLink>
+                <FooterLink href="/contact">Contact Us</FooterLink>
+                <FooterLink href="/terms">Terms & Conditions</FooterLink>
+                <FooterLink href="/privacy">Privacy Policy</FooterLink>
               </ul>
             </div>
 
@@ -89,4 +100,4 @@ export function Footer() {
       </div>
     </>
   )
-}
+})

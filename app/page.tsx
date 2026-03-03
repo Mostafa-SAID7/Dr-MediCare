@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, lazy, Suspense } from 'react'
+import { useState, lazy, Suspense, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Calendar, Clock, Phone, Shield, Award } from 'lucide-react'
@@ -17,8 +17,41 @@ import { doctors, specialties } from "@/data"
 // Lazy load heavy modals
 const EmergencyModal = lazy(() => import("@/components/emergency-modal").then(mod => ({ default: mod.EmergencyModal })))
 
+// Memoized components for better performance
+const StatCard = ({ value, label }: { value: string; label: string }) => (
+  <div className="text-center group">
+    <div className="text-3xl font-bold text-primary neon-stat border-2 border-primary/30 rounded-lg p-4 bg-primary/5 hover:border-primary/60 transition-all duration-300">
+      {value}
+    </div>
+    <div className="text-gray-600 mt-2">{label}</div>
+  </div>
+)
+
+const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
+  <div className="text-center space-y-4">
+    <div className="w-16 h-16 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full flex items-center justify-center mx-auto">
+      <Icon className="w-8 h-8 text-primary" />
+    </div>
+    <h3 className="text-xl font-semibold text-foreground">{title}</h3>
+    <p className="text-muted-foreground">{description}</p>
+  </div>
+)
+
 export default function HomePage() {
   const [emergencyModalOpen, setEmergencyModalOpen] = useState(false)
+
+  // Memoize static data
+  const stats = useMemo(() => [
+    { value: '500+', label: 'Expert Doctors' },
+    { value: '50k+', label: 'Happy Patients' },
+    { value: '24/7', label: 'Support' },
+  ], [])
+
+  const features = useMemo(() => [
+    { icon: Clock, title: '24/7 Availability', description: 'Round-the-clock medical support and emergency services' },
+    { icon: Shield, title: 'Secure & Private', description: 'Your medical data is protected with enterprise-grade security' },
+    { icon: Award, title: 'Expert Care', description: 'Board-certified doctors with years of experience' },
+  ], [])
 
   return (
     <div className="min-h-screen bg-grid-dots">
@@ -26,9 +59,8 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-secondary to-background overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Gradient Orbs - Reduced from 3 to 2 */}
+        {/* Animated Background - Optimized */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl will-change-transform" style={{ animation: 'float 6s ease-in-out infinite' }} />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/20 rounded-full blur-3xl will-change-transform" style={{ animation: 'float 8s ease-in-out infinite' }} />
         </div>
@@ -67,24 +99,9 @@ export default function HomePage() {
                 </Button>
               </div>
               <div className="grid grid-cols-3 gap-8 pt-8 min-h-[120px]">
-                <div className="text-center group">
-                  <div className="text-3xl font-bold text-primary neon-stat border-2 border-primary/30 rounded-lg p-4 bg-primary/5 hover:border-primary/60 transition-all duration-300">
-                    500+
-                  </div>
-                  <div className="text-gray-600 mt-2">Expert Doctors</div>
-                </div>
-                <div className="text-center group">
-                  <div className="text-3xl font-bold text-primary neon-stat border-2 border-primary/30 rounded-lg p-4 bg-primary/5 hover:border-primary/60 transition-all duration-300">
-                    50k+
-                  </div>
-                  <div className="text-gray-600 mt-2">Happy Patients</div>
-                </div>
-                <div className="text-center group">
-                  <div className="text-3xl font-bold text-secondary-foreground neon-stat border-2 border-secondary-foreground/30 rounded-lg p-4 bg-secondary-foreground/5 hover:border-secondary-foreground/60 transition-all duration-300">
-                    24/7
-                  </div>
-                  <div className="text-gray-600 mt-2">Support</div>
-                </div>
+                {stats.map((stat) => (
+                  <StatCard key={stat.label} value={stat.value} label={stat.label} />
+                ))}
               </div>
               
               <style jsx>{`
@@ -117,7 +134,7 @@ export default function HomePage() {
                   className="rounded-2xl shadow-2xl w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -top-4 -right-4 w-full h-full bg-gradient-to-r from-primary to-accent rounded-2xl -z-10"></div>
+              <div className="absolute -top-4 -right-4 w-full h-full bg-gradient-to-r from-primary to-accent rounded-2xl -z-10" aria-hidden="true"></div>
             </div>
           </div>
         </div>
@@ -132,7 +149,7 @@ export default function HomePage() {
         />
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {specialties.map((specialty, index) => (
-              <Card key={index} className="group hover:shadow-lg transition-all duration-300 cursor-pointer border-2 hover:border-primary rounded-lg shadow-sm transition-all duration-300 hover:shadow-md">
+              <Card key={index} className="group hover:shadow-lg transition-all duration-300 cursor-pointer border-2 hover:border-primary rounded-lg shadow-sm">
                 <CardContent className="p-6 text-center">
                   <div className="w-16 h-16 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                     <specialty.icon className="w-8 h-8 text-primary" />
@@ -167,27 +184,9 @@ export default function HomePage() {
           centered
         />
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="text-center space-y-4">
-              <div className="w-16 h-16 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full flex items-center justify-center mx-auto">
-                <Clock className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold text-foreground">24/7 Availability</h3>
-              <p className="text-muted-foreground">Round-the-clock medical support and emergency services</p>
-            </div>
-            <div className="text-center space-y-4">
-              <div className="w-16 h-16 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full flex items-center justify-center mx-auto">
-                <Shield className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold text-foreground">Secure & Private</h3>
-              <p className="text-muted-foreground">Your medical data is protected with enterprise-grade security</p>
-            </div>
-            <div className="text-center space-y-4">
-              <div className="w-16 h-16 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full flex items-center justify-center mx-auto">
-                <Award className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold text-foreground">Expert Care</h3>
-              <p className="text-muted-foreground">Board-certified doctors with years of experience</p>
-            </div>
+            {features.map((feature) => (
+              <FeatureCard key={feature.title} {...feature} />
+            ))}
           </div>
       </SectionContainer>
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, lazy, Suspense } from 'react'
+import { useState, lazy, Suspense, memo, useMemo } from 'react'
 import { Heart } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -24,9 +24,32 @@ const navLinks = [
   { href: "/contact", label: "Contact" },
 ]
 
-export function Header({ currentPath = '/', rightContent }: HeaderProps) {
+// Memoized nav link component
+const NavLink = memo(({ href, label, isActive }: { href: string; label: string; isActive: boolean }) => (
+  <Link 
+    href={href}
+    prefetch={true}
+    className={`text-white/90 hover:text-white transition-colors font-medium ${
+      isActive ? 'text-white font-bold border-b-2 border-white' : ''
+    }`}
+  >
+    {label}
+  </Link>
+))
+NavLink.displayName = 'NavLink'
+
+export const Header = memo(function Header({ currentPath = '/', rightContent }: HeaderProps) {
   const [authModalOpen, setAuthModalOpen] = useState(false)
   const [bookingModalOpen, setBookingModalOpen] = useState(false)
+
+  // Memoize active states
+  const activeStates = useMemo(() => 
+    navLinks.map(link => ({
+      ...link,
+      isActive: currentPath === link.href || (link.href !== '/' && currentPath?.startsWith(link.href))
+    })),
+    [currentPath]
+  )
 
   return (
     <>
@@ -40,23 +63,9 @@ export function Header({ currentPath = '/', rightContent }: HeaderProps) {
               <span className="text-xl font-bold text-white">MediCare</span>
             </Link>
             <nav className="hidden md:flex space-x-8">
-              {navLinks.map((link) => {
-                const isActive = currentPath === link.href || 
-                  (link.href !== '/' && currentPath?.startsWith(link.href))
-                
-                return (
-                  <Link 
-                    key={link.href} 
-                    href={link.href}
-                    prefetch={true}
-                    className={`text-white/90 hover:text-white transition-colors font-medium ${
-                      isActive ? 'text-white font-bold border-b-2 border-white' : ''
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                )
-              })}
+              {activeStates.map((link) => (
+                <NavLink key={link.href} {...link} />
+              ))}
             </nav>
             <div className="flex items-center space-x-4">
               <ThemeToggle />
@@ -89,4 +98,4 @@ export function Header({ currentPath = '/', rightContent }: HeaderProps) {
       </Suspense>
     </>
   )
-}
+})

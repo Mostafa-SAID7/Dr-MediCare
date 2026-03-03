@@ -1,6 +1,7 @@
 import { Calendar, Star, MapPin, Clock } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { memo } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -23,7 +24,7 @@ interface DoctorCardProps {
   }
 }
 
-export function DoctorCard({ doctor }: DoctorCardProps) {
+export const DoctorCard = memo(function DoctorCard({ doctor }: DoctorCardProps) {
   const slug = slugify(doctor.name)
 
   return (
@@ -104,4 +105,4 @@ export function DoctorCard({ doctor }: DoctorCardProps) {
       </CardContent>
     </Card>
   )
-}
+})

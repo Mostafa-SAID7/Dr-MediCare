@@ -8,26 +8,27 @@ import { Toaster } from 'sonner'
 const fontSans = Exo({ 
   subsets: ['latin'],
   variable: '--font-sans',
-  display: 'optional',
+  display: 'swap',
   preload: true,
   fallback: ['system-ui', 'arial'],
   adjustFontFallback: true,
+  weight: ['400', '500', '600', '700'],
 })
 
 const fontSerif = Source_Serif_4({ 
   subsets: ['latin'],
   variable: '--font-serif',
-  display: 'optional',
+  display: 'swap',
   preload: false,
   fallback: ['georgia', 'serif'],
   adjustFontFallback: true,
 })
 
 const fontMono = IBM_Plex_Mono({ 
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '500', '600'],
   subsets: ['latin'],
   variable: '--font-mono',
-  display: 'optional',
+  display: 'swap',
   preload: false,
   fallback: ['monospace'],
   adjustFontFallback: true,
@@ -122,12 +123,15 @@ export default function RootLayout({
         <meta name="google-site-verification" content="qYjGxU4mga3JQ4zSBL_ILdle0h5BVFPaNMx543Os9jU" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <style>{`
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <style dangerouslySetInnerHTML={{ __html: `
 html {
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
 }
-        `}</style>
+body {
+  text-rendering: optimizeSpeed;
+}
+        `}} />
         <meta name="theme-color" content="hsl(262, 95%, 35%)" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="hsl(262, 95%, 55%)" media="(prefers-color-scheme: dark)" />
         <script
@@ -136,17 +140,20 @@ html {
         />
       </head>
       <body suppressHydrationWarning>
-        {/* Google Analytics */}
+        {/* Google Analytics - Deferred for better performance */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-SYBLJRT13F"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-SYBLJRT13F');
+            gtag('config', 'G-SYBLJRT13F', {
+              page_path: window.location.pathname,
+              send_page_view: false
+            });
           `}
         </Script>
 

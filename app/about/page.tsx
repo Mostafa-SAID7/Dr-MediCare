@@ -1,5 +1,6 @@
 "use client"
 
+import { memo, useMemo } from 'react'
 import { Heart, Users, Award, Target, Shield, Clock, Calendar, Phone } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -60,6 +61,57 @@ const team = [
   }
 ]
 
+// Memoized components
+const StatCard = memo(({ stat }: { stat: typeof stats[0] }) => (
+  <div className="text-center">
+    <div className="text-4xl md:text-5xl font-bold text-primary mb-2 neon-stat border-2 border-primary/30 rounded-lg p-6 bg-primary/5 hover:border-primary/60 transition-all duration-300">
+      {stat.value}
+    </div>
+    <div className="text-muted-foreground mt-2">{stat.label}</div>
+  </div>
+))
+StatCard.displayName = 'StatCard'
+
+const ValueCard = memo(({ value }: { value: typeof values[0] }) => (
+  <Card className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-primary">
+    <CardContent className="p-6 text-center">
+      <div className="w-16 h-16 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+        <value.icon className="w-8 h-8 text-primary" />
+      </div>
+      <h3 className="text-xl font-bold text-foreground mb-3">
+        {value.title}
+      </h3>
+      <p className="text-muted-foreground">
+        {value.description}
+      </p>
+    </CardContent>
+  </Card>
+))
+ValueCard.displayName = 'ValueCard'
+
+const TeamMemberCard = memo(({ member }: { member: typeof team[0] }) => (
+  <Card className="hover:shadow-xl transition-all duration-300">
+    <CardContent className="p-6 text-center">
+      <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
+        <Users className="w-12 h-12 text-primary" />
+      </div>
+      <h3 className="text-xl font-bold text-foreground mb-1">
+        {member.name}
+      </h3>
+      <p className="text-primary font-medium mb-1">
+        {member.role}
+      </p>
+      <p className="text-sm text-muted-foreground mb-3">
+        {member.specialty}
+      </p>
+      <p className="text-muted-foreground">
+        {member.description}
+      </p>
+    </CardContent>
+  </Card>
+))
+TeamMemberCard.displayName = 'TeamMemberCard'
+
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-grid-dots">
@@ -91,12 +143,7 @@ export default function AboutPage() {
       <SectionContainer background="background">
         <div className="grid md:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2 neon-stat border-2 border-primary/30 rounded-lg p-6 bg-primary/5 hover:border-primary/60 transition-all duration-300">
-                {stat.value}
-              </div>
-              <div className="text-muted-foreground mt-2">{stat.label}</div>
-            </div>
+            <StatCard key={index} stat={stat} />
           ))}
         </div>
         
@@ -148,19 +195,7 @@ export default function AboutPage() {
         />
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {values.map((value, index) => (
-            <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-2 hover:border-primary">
-              <CardContent className="p-6 text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <value.icon className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold text-foreground mb-3">
-                  {value.title}
-                </h3>
-                <p className="text-muted-foreground">
-                  {value.description}
-                </p>
-              </CardContent>
-            </Card>
+            <ValueCard key={index} value={value} />
           ))}
         </div>
       </SectionContainer>
@@ -174,25 +209,7 @@ export default function AboutPage() {
         />
         <div className="grid md:grid-cols-3 gap-8">
           {team.map((member, index) => (
-            <Card key={index} className="hover:shadow-xl transition-all duration-300">
-              <CardContent className="p-6 text-center">
-                <div className="w-24 h-24 bg-gradient-to-br from-primary/20 to-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="w-12 h-12 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold text-foreground mb-1">
-                  {member.name}
-                </h3>
-                <p className="text-primary font-medium mb-1">
-                  {member.role}
-                </p>
-                <p className="text-sm text-muted-foreground mb-3">
-                  {member.specialty}
-                </p>
-                <p className="text-muted-foreground">
-                  {member.description}
-                </p>
-              </CardContent>
-            </Card>
+            <TeamMemberCard key={index} member={member} />
           ))}
         </div>
       </SectionContainer>

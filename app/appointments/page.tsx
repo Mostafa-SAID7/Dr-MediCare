@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo, memo, useCallback } from "react"
 import { Calendar, Clock, User, Phone, MapPin, Heart, Filter, Search, MoreVertical, Video, MessageSquare, Menu } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -42,7 +42,15 @@ export default function AppointmentsPage() {
     }
   })
 
-  const formatDate = (dateString: string) => {
+  // Memoize stats calculations
+  const stats = useMemo(() => ({
+    confirmed: appointments.filter(a => a.status === 'confirmed').length,
+    pending: appointments.filter(a => a.status === 'pending').length,
+    completed: appointments.filter(a => a.status === 'completed').length,
+    total: appointments.length
+  }), [])
+
+  const formatDate = useCallback((dateString: string) => {
     const date = new Date(dateString)
     const today = new Date()
     const tomorrow = new Date(today)
@@ -59,9 +67,9 @@ export default function AppointmentsPage() {
         day: 'numeric' 
       })
     }
-  }
+  }, [])
 
-  const formatTime = (timeString: string) => {
+  const formatTime = useCallback((timeString: string) => {
     const [hours, minutes] = timeString.split(':')
     const date = new Date()
     date.setHours(parseInt(hours), parseInt(minutes))
@@ -70,7 +78,7 @@ export default function AppointmentsPage() {
       minute: '2-digit',
       hour12: true 
     })
-  }
+  }, [])
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -149,7 +157,7 @@ export default function AppointmentsPage() {
           <Card className="rounded-lg shadow-sm transition-all duration-300 hover:shadow-md">
             <CardContent className="p-6 text-center">
               <div className="text-3xl font-bold text-primary mb-2">
-                {appointments.filter(a => a.status === 'confirmed').length}
+                {stats.confirmed}
               </div>
               <div className="text-gray-600">
                 Confirmed
@@ -159,7 +167,7 @@ export default function AppointmentsPage() {
           <Card className="rounded-lg shadow-sm transition-all duration-300 hover:shadow-md">
             <CardContent className="p-6 text-center">
               <div className="text-3xl font-bold text-yellow-600 mb-2">
-                {appointments.filter(a => a.status === 'pending').length}
+                {stats.pending}
               </div>
               <div className="text-gray-600">
                 Pending
@@ -169,7 +177,7 @@ export default function AppointmentsPage() {
           <Card className="rounded-lg shadow-sm transition-all duration-300 hover:shadow-md">
             <CardContent className="p-6 text-center">
               <div className="text-3xl font-bold text-green-600 mb-2">
-                {appointments.filter(a => a.status === 'completed').length}
+                {stats.completed}
               </div>
               <div className="text-gray-600">
                 Completed
@@ -179,7 +187,7 @@ export default function AppointmentsPage() {
           <Card className="rounded-lg shadow-sm transition-all duration-300 hover:shadow-md">
             <CardContent className="p-6 text-center">
               <div className="text-3xl font-bold text-gray-600 mb-2">
-                {appointments.length}
+                {stats.total}
               </div>
               <div className="text-gray-600">
                 Total

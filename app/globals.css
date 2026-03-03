@@ -370,6 +370,9 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed;
   }
 
   body {
@@ -378,10 +381,23 @@
     background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.12) 1.5px, transparent 0);
     background-size: 24px 24px;
     background-attachment: fixed;
+    /* Optimize rendering */
+    contain: layout style paint;
   }
   
   .dark body {
     background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1.5px, transparent 0);
+  }
+  
+  /* Optimize animations */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 

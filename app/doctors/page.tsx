@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo, memo } from "react"
 import { Search } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -33,12 +33,15 @@ export default function DoctorsPage() {
     }
   })
 
-  const sortedDoctors = [...filteredItems].sort((a, b) => {
-    if (sortBy === "rating") return b.rating - a.rating
-    if (sortBy === "experience") return parseInt(b.experience) - parseInt(a.experience)
-    if (sortBy === "fee") return parseInt(a.consultationFee.replace("$", "")) - parseInt(b.consultationFee.replace("$", ""))
-    return 0
-  })
+  // Memoize sorted doctors to avoid re-sorting on every render
+  const sortedDoctors = useMemo(() => {
+    return [...filteredItems].sort((a, b) => {
+      if (sortBy === "rating") return b.rating - a.rating
+      if (sortBy === "experience") return parseInt(b.experience) - parseInt(a.experience)
+      if (sortBy === "fee") return parseInt(a.consultationFee.replace("$", "")) - parseInt(b.consultationFee.replace("$", ""))
+      return 0
+    })
+  }, [filteredItems, sortBy])
 
   return (
     <div className="min-h-screen bg-grid-dots">

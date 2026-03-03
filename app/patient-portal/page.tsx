@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useCallback, useMemo } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { User, Calendar, Clock, Edit, LogOut } from 'lucide-react'
@@ -21,25 +21,44 @@ export default function PatientPortalPage() {
   const [isEditingProfile, setIsEditingProfile] = useState(false)
   const [profileData, setProfileData] = useState(patient)
 
-  const handleProfileChange = (field: string, value: string) => {
+  // Memoize filtered appointments
+  const upcomingAppointments = useMemo(() => 
+    patientAppointments.filter(app => 
+      new Date(app.date) >= new Date() && 
+      app.status !== 'completed' && 
+      app.status !== 'cancelled'
+    ),
+    []
+  )
+
+  const pastAppointments = useMemo(() =>
+    patientAppointments.filter(app => 
+      new Date(app.date) < new Date() || 
+      app.status === 'completed' || 
+      app.status === 'cancelled'
+    ),
+    []
+  )
+
+  const handleProfileChange = useCallback((field: string, value: string) => {
     setProfileData(prev => ({ ...prev, [field]: value }))
-  }
+  }, [])
   
-  const handleDateChange = (date: Date | undefined) => {
+  const handleDateChange = useCallback((date: Date | undefined) => {
     if (date) {
       // Convert Date to YYYY-MM-DD string format
       const dateString = date.toISOString().split('T')[0]
       setProfileData(prev => ({ ...prev, dateOfBirth: dateString }))
     }
-  }
+  }, [])
 
-  const handleSaveProfile = () => {
+  const handleSaveProfile = useCallback(() => {
     // In a real app, you'd send this data to your backend
     console.log("Saving profile:", profileData)
     setIsEditingProfile(false)
-  }
+  }, [profileData])
 
-  const formatDate = (dateString: string) => {
+  const formatDate = useCallback((dateString: string) => {
     const date = new Date(dateString)
     const today = new Date()
     const tomorrow = new Date(today)
@@ -56,9 +75,9 @@ export default function PatientPortalPage() {
         day: 'numeric' 
       })
     }
-  }
+  }, [])
 
-  const formatTime = (timeString: string) => {
+  const formatTime = useCallback((timeString: string) => {
     const [hours, minutes] = timeString.split(':')
     const date = new Date()
     date.setHours(parseInt(hours), parseInt(minutes))
@@ -67,7 +86,7 @@ export default function PatientPortalPage() {
       minute: '2-digit',
       hour12: true 
     })
-  }
+  }, [])
 
   return (
     <div className="min-h-screen bg-grid-dots">
@@ -225,8 +244,8 @@ export default function PatientPortalPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                {patientAppointments.filter(app => new Date(app.date) >= new Date() && app.status !== 'completed' && app.status !== 'cancelled').length > 0 ? (
-                  patientAppointments.filter(app => new Date(app.date) >= new Date() && app.status !== 'completed' && app.status !== 'cancelled').map((appointment) => (
+                {upcomingAppointments.length > 0 ? (
+                  upcomingAppointments.map((appointment) => (
                     <div key={appointment.id} className="flex items-center justify-between p-4 border rounded-lg bg-muted/30">
                       <div className="flex items-center space-x-4">
                         <DoctorAvatar 
@@ -272,8 +291,8 @@ export default function PatientPortalPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                {patientAppointments.filter(app => new Date(app.date) < new Date() || app.status === 'completed' || app.status === 'cancelled').length > 0 ? (
-                  patientAppointments.filter(app => new Date(app.date) < new Date() || app.status === 'completed' || app.status === 'cancelled').map((appointment) => (
+                {pastAppointments.length > 0 ? (
+                  pastAppointments.map((appointment) => (
                     <div key={appointment.id} className="flex items-center justify-between p-4 border rounded-lg bg-muted/30">
                       <div className="flex items-center space-x-4">
                         <DoctorAvatar 
