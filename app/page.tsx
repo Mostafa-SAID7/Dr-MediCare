@@ -3,7 +3,7 @@
 import { useState, lazy, Suspense } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, Clock, Phone, Shield, Award, Heart } from 'lucide-react'
+import { Calendar, Clock, Phone, Shield, Award } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Header } from "@/components/header"
@@ -28,28 +28,9 @@ export default function HomePage() {
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-secondary to-background overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Gradient Orbs */}
-          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-float-hero" />
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-float-delayed" />
-          <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-secondary/20 rounded-full blur-3xl animate-pulse-slow" />
-          
-          {/* Floating Particles */}
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full animate-particle-1" />
-          <div className="absolute top-1/3 right-1/3 w-3 h-3 bg-accent rounded-full animate-particle-2" />
-          <div className="absolute bottom-1/4 left-1/3 w-2 h-2 bg-primary rounded-full animate-particle-3" />
-          <div className="absolute top-2/3 right-1/4 w-3 h-3 bg-accent rounded-full animate-particle-4" />
-          <div className="absolute bottom-1/3 right-1/2 w-2 h-2 bg-secondary-foreground rounded-full animate-particle-5" />
-          
-          {/* Medical Icons Floating */}
-          <div className="absolute top-1/4 right-1/4 opacity-10 animate-float-slow">
-            <Heart className="w-16 h-16 text-primary" />
-          </div>
-          <div className="absolute bottom-1/3 left-1/4 opacity-10 animate-float-delayed">
-            <Shield className="w-12 h-12 text-accent" />
-          </div>
-          <div className="absolute top-1/2 right-1/3 opacity-10 animate-float-hero">
-            <Award className="w-14 h-14 text-secondary-foreground" />
-          </div>
+          {/* Gradient Orbs - Reduced from 3 to 2 */}
+          <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl will-change-transform" style={{ animation: 'float 6s ease-in-out infinite' }} />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/20 rounded-full blur-3xl will-change-transform" style={{ animation: 'float 8s ease-in-out infinite' }} />
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
