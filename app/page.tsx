@@ -121,7 +121,7 @@ export default function HomePage() {
               `}</style>
             </div>
             <div className="relative">
-              <div className="relative z-10 aspect-[3/2]">
+              <div className="relative z-10 aspect-[3/2] bg-gradient-to-br from-primary/5 to-accent/5">
                 <Image
                   src="/modern-medical-consultation-sketch.png"
                   alt="Medical consultation"
@@ -129,9 +129,12 @@ export default function HomePage() {
                   height={400}
                   priority
                   fetchPriority="high"
-                  quality={85}
+                  quality={90}
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 600px"
                   className="rounded-2xl shadow-2xl w-full h-full object-cover"
+                  loading="eager"
+                  placeholder="blur"
+                  blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iI2YzZjRmNiIvPjwvc3ZnPg=="
                 />
               </div>
               <div className="absolute -top-4 -right-4 w-full h-full bg-gradient-to-r from-primary to-accent rounded-2xl -z-10" aria-hidden="true"></div>

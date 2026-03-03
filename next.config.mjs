@@ -15,6 +15,10 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // Optimize for LCP
+    loader: 'default',
+    domains: [],
+    remotePatterns: [],
   },
   // Performance optimizations
   compiler: {

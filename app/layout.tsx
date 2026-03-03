@@ -124,6 +124,12 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link 
+          rel="preload" 
+          as="image" 
+          href="/modern-medical-consultation-sketch.png"
+          fetchPriority="high"
+        />
         <style dangerouslySetInnerHTML={{ __html: `
 html {
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
