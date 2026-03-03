@@ -11,7 +11,6 @@ import { Footer } from "@/components/footer"
 import { PageHeader } from "@/components/page-header"
 import { DoctorCard } from "@/components/doctor-card"
 import { SectionContainer } from "@/components/section-container"
-import { TypingText } from "@/components/typing-text"
 import { doctors, specialties } from "@/data"
 
 // Lazy load heavy modals
@@ -20,20 +19,20 @@ const EmergencyModal = lazy(() => import("@/components/emergency-modal").then(mo
 // Memoized components for better performance
 const StatCard = ({ value, label }: { value: string; label: string }) => (
   <div className="text-center group">
-    <div className="text-3xl font-bold text-primary neon-stat border-2 border-primary/30 rounded-lg p-4 bg-primary/5 hover:border-primary/60 transition-all duration-300">
+    <div className="text-3xl font-bold text-primary neon-stat border-2 border-primary/30 rounded-lg p-4 bg-primary/5 hover:border-primary/60 transition-all duration-300 min-h-[88px] flex items-center justify-center">
       {value}
     </div>
-    <div className="text-gray-600 mt-2">{label}</div>
+    <div className="text-gray-600 mt-2 min-h-[24px]">{label}</div>
   </div>
 )
 
 const FeatureCard = ({ icon: Icon, title, description }: { icon: any; title: string; description: string }) => (
-  <div className="text-center space-y-4">
+  <div className="text-center space-y-4 min-h-[200px]">
     <div className="w-16 h-16 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full flex items-center justify-center mx-auto">
       <Icon className="w-8 h-8 text-primary" />
     </div>
-    <h3 className="text-xl font-semibold text-foreground">{title}</h3>
-    <p className="text-muted-foreground">{description}</p>
+    <h3 className="text-xl font-semibold text-foreground min-h-[28px]">{title}</h3>
+    <p className="text-muted-foreground min-h-[48px]">{description}</p>
   </div>
 )
 
@@ -69,13 +68,8 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight min-h-[4.5rem] md:min-h-[5.5rem] lg:min-h-[7rem]">
-                  <TypingText 
-                    text="Your Health, Our Priority" 
-                    speed={80}
-                    neon
-                    className="text-primary"
-                  />
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight text-primary">
+                  Your Health, Our Priority
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed">
                   Book appointments with top-rated doctors instantly. Quality healthcare made accessible and convenient.
@@ -98,7 +92,7 @@ export default function HomePage() {
                   Emergency Call
                 </Button>
               </div>
-              <div className="grid grid-cols-3 gap-8 pt-8 min-h-[120px]">
+              <div className="grid grid-cols-3 gap-8 pt-8 min-h-[140px]">
                 {stats.map((stat) => (
                   <StatCard key={stat.label} value={stat.value} label={stat.label} />
                 ))}
