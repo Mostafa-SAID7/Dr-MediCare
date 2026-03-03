@@ -34,6 +34,10 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
     // Enable optimized CSS loading
     optimizeCss: true,
+    // Reduce client-side JavaScript
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
   },
   // Webpack optimizations
   webpack: (config, { isServer }) => {
@@ -71,7 +75,14 @@ const nextConfig = {
             },
           },
         },
+        // Minimize runtime overhead
+        runtimeChunk: {
+          name: 'runtime',
+        },
       }
+      
+      // Reduce module concatenation overhead
+      config.optimization.concatenateModules = true
     }
     return config
   },

@@ -130,6 +130,7 @@ export default function HomePage() {
                   width={600}
                   height={400}
                   priority
+                  fetchPriority="high"
                   quality={85}
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 600px"
                   className="rounded-2xl shadow-2xl w-full h-full object-cover"

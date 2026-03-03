@@ -120,6 +120,9 @@ export default function RootLayout({
     <html lang="en" className={`${fontSans.variable} ${fontSerif.variable} ${fontMono.variable}`} suppressHydrationWarning>
       <head>
         <meta name="google-site-verification" content="qYjGxU4mga3JQ4zSBL_ILdle0h5BVFPaNMx543Os9jU" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <style>{`
 html {
   font-family: var(--font-sans);
