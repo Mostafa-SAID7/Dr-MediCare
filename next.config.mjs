@@ -6,62 +6,33 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  images: {
-    unoptimized: false,
-    formats: ['image/avif', 'image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
-    dangerouslyAllowSVG: true,
-    contentDispositionType: 'attachment',
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    // Optimize for LCP
-    loader: 'default',
-    domains: [],
-    remotePatterns: [],
+  // Target modern browsers to avoid unnecessary polyfills
+  experimental: {
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
+    // Reduce client-side JavaScript
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
   },
-  // Performance optimizations
+  // Target modern browsers (ES2020+)
+  // This removes unnecessary polyfills for Array.at, Array.flat, etc.
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production' ? {
       exclude: ['error', 'warn'],
     } : false,
     // Remove React properties in production
     reactRemoveProperties: process.env.NODE_ENV === 'production',
-    // Remove React DevTools in production
-    removeReactProperties: process.env.NODE_ENV === 'production',
   },
   // Reduce overhead
   poweredByHeader: false,
   // Compress responses
   compress: true,
-  // Enable SWC minification
-  swcMinify: true,
   // Optimize production builds
   productionBrowserSourceMaps: false,
   // Reduce bundle size
   modularizeImports: {
     'lucide-react': {
       transform: 'lucide-react/dist/esm/icons/{{member}}',
-    },
-  },
-  experimental: {
-    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
-    // Enable optimized CSS loading
-    optimizeCss: true,
-    // Reduce client-side JavaScript
-    serverActions: {
-      bodySizeLimit: '2mb',
-    },
-    // Optimize font loading
-    optimizeFonts: true,
-    // Enable turbo mode for faster builds
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
-      },
     },
   },
   // Webpack optimizations
@@ -156,16 +127,22 @@ const nextConfig = {
         hints: 'warning',
       }
       
-      // Reduce resolve time
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        'date-fns': 'date-fns/esm',
-      }
+      // Reduce resolve time - removed date-fns alias as it causes issues
       
       // Exclude source maps in production
       config.devtool = false
     }
     return config
+  },
+  // Image optimization
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   // Headers for better caching
   async headers() {

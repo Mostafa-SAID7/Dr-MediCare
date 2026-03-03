@@ -1,0 +1,16 @@
+# Target modern browsers to eliminate unnecessary polyfills
+# This removes polyfills for Array.at, Array.flat, Array.flatMap, 
+# Object.fromEntries, Object.hasOwn, String.prototype.trimEnd/trimStart
+
+# Modern browsers with ES2020+ support
+> 0.5%
+last 2 versions
+not dead
+not IE 11
+not op_mini all
+
+# Specific modern browser versions
+Chrome >= 90
+Firefox >= 88
+Safari >= 14
+Edge >= 90
